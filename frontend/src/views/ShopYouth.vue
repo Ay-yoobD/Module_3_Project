@@ -1,11 +1,22 @@
 <template>
-    <ShopNavBar/>
-    <router-view/>
+    <body>
+        <nav>
+            <ShopNavBar />
+        </nav>
+        <aside id="filterside">
+           <ShopFilterBar/>
+        </aside>
+        <main>
+            <div class="ProductCardView">
+                <div class="ProdCard">
+                    Test Youth
+                </div>
 
-    <main class="PageTargetter">
-        Youth store here:
-    </main>
+            </div>
 
+        </main>
+
+    </body>
 </template>
 
 <script>

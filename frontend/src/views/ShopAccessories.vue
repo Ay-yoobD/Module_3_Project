@@ -1,11 +1,22 @@
 <template>
-    <ShopNavBar />
-    <router-view />
+    <body>
+        <nav>
+            <ShopNavBar />
+        </nav>
+        <aside id="filterside">
+            <ShopFilterBar />
+        </aside>
+        <main>
+            <div class="ProductCardView">
+                <div class="ProdCard">
+                    Test Accessories
+                </div>
 
-    <main class="PageTargetter">
-        Accessories store here:
-    </main>
+            </div>
 
+        </main>
+
+    </body>
 
 </template>
 
@@ -25,7 +36,6 @@ export default {
 
 
 <style scoped>
-
 /* --------------------------------CSS Load in for whole Page----------------------------------- */
 
 .PageTargetter {
@@ -42,6 +52,4 @@ export default {
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-
 </style>

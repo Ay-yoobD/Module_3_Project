@@ -1,0 +1,96 @@
+
+
+    <!-- <div class="PageWrapper">
+        <router-view />
+
+        <main class="PageTargetter">
+            <div class="title">
+                <h3>Our Women's Selection:</h3>
+
+            </div>
+
+            <div class="ShopContainer">
+                <div class="filterBar">
+                    <h4 class="display-5">Filters:</h4>
+
+                    <ul>
+                        <li>
+                            Type:
+                            <div class="TypeFilter">
+                                <ul>
+                                    <li><input type="radio" name="type" value="Tops"> Tops</li>
+                                    <li><input type="radio" name="type" value="Bottoms"> Bottoms</li>
+                                    <li><input type="radio" name="type" value="Sneakers"> Sneakers</li>
+                                    <li><input type="radio" name="type" value="Accessories"> Accessories</li>
+                                </ul>
+
+                            </div>
+
+                        </li>
+                        <br>
+                        <li>
+                            Style
+                            <div class="StyleFilter">
+                                <ul>
+                                    <li><input type="radio" name="style" value="Casual"> Casual</li>
+                                    <li> <input type="radio" name="style" value="SmartCasual"> Smart Casual</li>
+                                    <li><input type="radio" name="style" value="Formal"> Formal</li>
+                                    <li><input type="radio" name="style" value="Sport"> Sporty</li>
+                                </ul>
+
+                            </div>
+                        </li>
+                        <br>
+                        <li>
+                            Price
+                            <div class="PriceRangeFilter">
+                                <ul>
+                                    <li>
+                                        <label for="minPrice">Minimum Price:</label>
+                                        R<span id="minVal">100</span>
+                                        <br>
+                                        <input type="range" id="minPrice" min="0" max="1500" step="5" value="100">
+
+                                    </li>
+
+                                    <li>
+                                        <label for="maxPrice">Maximum Price:</label>
+                                        R<span id="maxVal">900</span>
+                                        <br>
+                                        <input type="range" id="maxPrice" min="0" max="1500" step="5" value="900">
+
+                                    </li>
+
+                                </ul>
+
+                            </div>
+
+                        </li>
+                        <br>
+                        <li>
+                            In Stock?
+                            <div class="StockFilter">
+                                <ul>
+                                    <li> <input type="radio" name="stock" value="StockAvailable"> Stock Available</li>
+                                    <li><input type="radio" name="stock" value="StockUnavailable"> Out of Stock</li>
+
+                                </ul>
+
+
+
+                            </div>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+
+        </main>
+
+
+    </div> -->
