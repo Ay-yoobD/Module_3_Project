@@ -8,13 +8,12 @@
         </nav>
 
         <!-- Filter Button (only visible on mobile) -->
-        <div class="filter-btn-container">
+        
+        <div class="filter-btn-container" style="top:60px">
             <button class="filter-toggle" @click="toggleSide">
                 <img src="../assets/filter.png" alt="filterbtn">
-                Filters
             </button>
         </div>
-
         <aside id="filterside" :class="{ show: isFilterOpen }" class="PageTargetter">
             <div class="ShopContainer">
                 <div class="filterBar">
@@ -113,7 +112,10 @@
                     </div>
                     <p class="lead ProdText">Some Details Here</p>
                     <p class="fw-lighter ProdText">Pricing details go here</p>
-                    <button>More Details btn</button>
+                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#productModal">
+                        View Product
+                    </button>
+
                 </div>
                 <div class="ProdCard">
                     <img class="imgprod"
@@ -381,30 +383,45 @@
                     <p class="fw-lighter ProdText">Pricing details go here</p>
                     <button>More Details btn</button>
                 </div>
-                <!-- <div class="ProdCard">
-                    <img class="imgprod" src="https://img.kwcdn.com/product/Fancyalgo/VirtualModelMatting/41afc2867b6489330d4144f4be120756.jpg?imageView2/2/w/800/q/70/format/webp" alt="productImg">
 
-                    <div class="scroll-wrapper">
-                        <div class="scroll-content">
-                            <h3 class="scroll-text">This is a very long product name that scrolls seamlessly when you
-                                hover the card</h3>
-                            <h3 class="scroll-text">This is a very long product name that scrolls seamlessly when you
-                                hover the card</h3>
-                        </div>
-                    </div>
-
-                    <p class="lead ProdText">Some Details Here</p>
-                    <p class="fw-lighter ProdText">Pricing details go here</p>
-                    <button>More Details btn</button>
-
-                </div> -->
 
             </div>
 
         </main>
 
 
+
+
+
     </body>
+
+    <!-- Modal -->
+    <!-- Modal -->
+    <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content custom-blur">
+                <div class="modal-header prodinfoheading  border-0 m-2">
+                    <h5 class="modal-title " id="productModalLabel">Product Name</h5>
+
+                </div>
+                <div class="modal-body text-center m-3">
+                    <img src="https://img.kwcdn.com/product/Fancyalgo/VirtualModelMatting/41afc2867b6489330d4144f4be120756.jpg?imageView2/2/w/800/q/70/format/webp" alt="Product Image" class="prodimg2">
+                    <p class="fs-5 fw-bold">$99.99</p>
+                    <p class="text-muted my-2">
+                        Detailed description of the product goes here. You can mention fabric, size, fit, and other
+                        info.
+                    </p>
+                </div>
+                <div class="modal-footer border-0  justify-content-between">
+                    <button type="button" class="btnClose " data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btnAddToCart "><span>Add to Cart</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 
 
 
@@ -422,7 +439,7 @@ export default {
         return {
             minPrice: 100,
             maxPrice: 900,
-             isFilterOpen: false
+            isFilterOpen: false
 
         };
 
@@ -476,14 +493,7 @@ export default {
 /* --------------------------------------------------------------------------------------------- */
 
 /* --------------------------------Filter Bar CSS Styling:-------------------------------------- */
-/* 
-.ShopContainer {
-    display: flex;
-    flex: 1;
-    overflow: hidden;
-}
- */
-
+ 
 .filterBar {
     width: 250px;
     overflow-y: auto;
@@ -506,63 +516,99 @@ export default {
 
 /* Filter Button Styling */
 .filter-btn-container {
-  display: none; /* hidden on desktop */
-  padding: 0.5rem;
-  background: #f8f8f8;
-  text-align: center;
+    display: none;
+    /* hidden on desktop */
+    padding: 0.5rem;
+    background: #f8f8f8;
+    text-align: center;
 }
 
 .filter-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: linear-gradient(to right, #3315dec4, rgb(54, 142, 237));
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(to right, #3315dec4, rgb(54, 142, 237));
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
 .filter-toggle img {
-  width: 20px;
-  height: 20px;
+    width: 20px;
+    height: 20px;
 }
 
-/* --------------------------------------------------------------------------------------------- */
 
-/* ------------------------------General Styling for page:-------------------------------------- */
-/* main {
-    font-family: inherit, sans-serif, arial;
-
-} */
-/* 
-.title {
-    text-align: center;
-    padding: 10px;
-    margin-bottom: 10px;
-    font-style: oblique;
-    font-weight: 900;
+button {
+    height: 51.95px;
+    width: 51.9px;
+    border: none;
+    background-color: white;
 
 }
 
-.title h3 {
-    font-weight: 600;
+button img {
+    height: 51.95px;
+    width: 51.9px;
 
-} */
-/* 
-.pageWrapper {
+}
+
+.filterHead {
     display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow: hidden;
+    align-items: center;
+    gap: 10px;
 }
- */
 
+.filterHead h3 {
+    margin: 0;
+}
+
+
+.PriceRangeFilter input {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: linear-gradient(to right, #3315dec4, rgb(54, 142, 237));
+}
+
+.PriceRangeFilter input::-webkit-slider-runnable-track {
+    background: linear-gradient(to right, #3315dec4, rgb(54, 142, 237));
+    border-radius: 5px;
+    height: 6px;
+    box-shadow:
+        /* right shadow */
+        6px 0px 10px -1px rgba(25, 96, 250, 0.414),
+        /* left shadow */
+        -4px 0px 3.5px -2px rgba(152, 30, 246, 0.414),
+        /* top shadow */
+        0px -4px 3.5px -2px rgba(152, 30, 246, 0.414),
+        /* bottom shadow */
+        0px 6px 8px -1px rgba(25, 96, 250, 0.414);
+
+}
+
+
+
+.PriceRangeFilter input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: linear-gradient(to right, #3315de, rgb(54, 142, 237));
+    border: solid black 2px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: -4px;
+    transition: background 0.3s;
+
+
+}
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* GRID TESTING */
+/* -----------------------------------------Grid CSS-------------------------------------------- */
+
 * {
     margin: 0;
     padding: 0;
@@ -599,31 +645,31 @@ aside {
 }
 
 @media (max-width: 900px) {
-  body {
-    grid-template-columns: 1fr; /* full width for main content */
-    grid-template-areas:
-      "navbar"
-      "main";
-  }
+    body {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "navbar"
+            "main";
+    }
 
-  aside {
-    position: fixed;
-    top: 60px;
-    left: 0;
-    width: 250px;
-    height: calc(100dvh - 60px);
-    background: white;
-    transform: translateX(-100%);
-    z-index: 9998;
-  }
+    aside {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 250px;
+        height: calc(100dvh - 60px);
+        background: white;
+        transform: translateX(-100%);
+        z-index: 9998;
+    }
 
-  aside.show {
-    transform: translateX(0);
-  }
+    aside.show {
+        transform: translateX(0);
+    }
 
-  .filter-btn-container {
-    display: block; /* show button on mobile */
-  }
+    .filter-btn-container {
+        display: block;
+    }
 }
 
 main {
@@ -632,31 +678,7 @@ main {
 
 }
 
-
-
-button {
-    height: 51.95px;
-    width: 51.9px;
-    border: none;
-    background-color: white;
-
-}
-
-button img {
-    height: 51.95px;
-    width: 51.9px;
-
-}
-
-.filterHead {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.filterHead h3 {
-    margin: 0;
-}
+/* --------------------------------------------------------------------------------------------- */
 
 /* ----------------------------------------Product Card CSS------------------------------------- */
 
@@ -702,45 +724,7 @@ button img {
     width: 120px;
     height: auto;
     margin-bottom: 10px;
-}
-
-.PriceRangeFilter input {
-    -webkit-appearance: none;
-    appearance: none;
-    background-color: linear-gradient(to right, #3315dec4, rgb(54, 142, 237));
-}
-
-.PriceRangeFilter input::-webkit-slider-runnable-track {
-    background: linear-gradient(to right, #3315dec4, rgb(54, 142, 237));
-    border-radius: 5px;
-    height: 6px;
-    box-shadow:
-        /* right shadow */
-        6px 0px 10px -1px rgba(25, 96, 250, 0.414),
-        /* left shadow */
-        -4px 0px 3.5px -2px rgba(152, 30, 246, 0.414),
-        /* top shadow */
-        0px -4px 3.5px -2px rgba(152, 30, 246, 0.414),
-        /* bottom shadow */
-        0px 6px 8px -1px rgba(25, 96, 250, 0.414);
-
-}
-
-
-
-.PriceRangeFilter input::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 15px;
-    height: 15px;
-    background: linear-gradient(to right, #3315de, rgb(54, 142, 237));
-    border: solid black 2px;
-    border-radius: 50%;
-    cursor: pointer;
-    margin-top: -4px;
-    transition: background 0.3s;
-
-
+    object-fit: cover;
 }
 
 .ProdCard button {
@@ -807,54 +791,100 @@ button img {
 
 
 
+/* ------------------------------------Modal Styling:------------------------------------------ */
 
+#productModal{
+    z-index: 99999999   ;
 
-
-
-
-
-
-
-
-
-
-/* .scroll-wrapper {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-  white-space: nowrap;
-
-  mask-image: linear-gradient(to right, black 85%, transparent);
-  -webkit-mask-image: linear-gradient(to right, black 85%, transparent);
-  z-index: -1; 
 }
 
-.scroll-content {
-  display: inline-block;
-  white-space: nowrap;
-  transform: translateX(0);
-  animation: none;
+.modal-dialog {
+    margin: 0 auto;
+
 }
 
-.ProdCard:hover .scroll-content {
-  animation: marquee 10s linear infinite;
+.modal-backdrop.show {
+    backdrop-filter: blur(6px);
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  
-  }
+.prodimg2{
+    object-fit: contain;
+    height: 400px;
+    width: 400px;
 }
 
-.scroll-content .scroll-text {
-  display: inline-block;
-  width: 100%;
-  margin: 0;
-  padding: 0 1rem; 
-  box-sizing: border-box;
-} */
+
+.btnClose {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    height: 40px;
+    width: 100px;
+    margin: 10px;  
+    border-radius: 8px !important;    
+}
+
+.btnAddToCart {
+    background: linear-gradient(135deg, #3315dec4, rgb(54, 142, 237)) !important;
+    border-radius: 8px !important;
+    box-shadow:
+        /* right shadow */
+        6px 0px 10px -1px rgba(25, 96, 250, 0.414),
+        /* left shadow */
+        -4px 0px 3.5px -2px rgba(152, 30, 246, 0.414),
+        /* top shadow */
+        0px -4px 3.5px -2px rgba(152, 30, 246, 0.414),
+        /* bottom shadow */
+        0px 6px 8px -1px rgba(25, 96, 250, 0.414);
+
+    color: rgb(255, 255, 255);
+    border: none;
+    height: 40px;
+    width: 100px;
+    margin: 10px;
+    position: relative;
+    transition: box-shadow .7s;
+   
+}
+
+.btnAddToCart:hover{
+        box-shadow:
+        /* right shadow */
+        6px 0px 10px -1px rgba(152, 30, 246, 0.414),
+        /* left shadow */
+        -4px 0px 3.5px -2px rgba(25, 96, 250, 0.414),
+        /* top shadow */
+        0px -4px 3.5px -2px rgba(25, 96, 250, 0.414),
+        /* bottom shadow */
+        0px 6px 8px -1px rgba(152, 30, 246, 0.414);
+
+
+}
+
+.btnAddToCart::before {
+    content: '';
+    position: absolute;
+    border-radius: 8px !important;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(135deg, rgba(54, 213, 237, 0.751), #7d15dea1) !important;
+    opacity: 0;
+    transition: opacity 0.8s ease-in;
+    color: white;
+
+}
+
+.btnAddToCart:hover::before {
+    opacity: 1;
+
+}
+
+.btnAddToCart > span{
+    position: relative;
+}
+
+
 </style>

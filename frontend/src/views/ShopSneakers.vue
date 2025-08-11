@@ -1,18 +1,23 @@
 <template>
+
     <body>
+
+
         <nav>
             <ShopNavBar />
         </nav>
-        <aside>
-            <ShopFilterBar />
+
+        <!-- Filter Button (only visible on mobile) -->
+        
+        <aside >
+            <ShopFilterBar/>
         </aside>
         <main>
-            <ShopProdCard/>
-
+          <ShopProdCard/>
         </main>
 
-    </body>
 
+    </body>
 </template>
 
 <script>
@@ -21,34 +26,18 @@ import ShopNavBar from "../components/ShopNavBar.vue";
 import ShopProdCard from "@/components/ShopProdCard.vue";
 
 export default {
-    components: {
-        ShopNavBar,
-        ShopFilterBar,
-        ShopProdCard
-    }
+  components: {
+    ShopNavBar,
+    ShopFilterBar,
+    ShopProdCard
+  }
 
 }
 
 
 </script>
 
-
-
 <style scoped>
-/* --------------------------------CSS Load in for whole Page----------------------------------- */
-
-.PageTargetter {
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeInUp 0.6s ease-out forwards;
-}
-
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
 /* -----------------------------------------Grid CSS-------------------------------------------- */
 

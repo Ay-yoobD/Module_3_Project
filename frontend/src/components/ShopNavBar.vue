@@ -134,15 +134,15 @@ export default {
                     Featured
                 </router-link>
 
-                <router-link to="/women">
+                <router-link to="/tops">
                     Tops
                 </router-link>
 
-                <router-link to="/men">
+                <router-link to="/bottoms">
                     Bottoms
                 </router-link>
 
-                <router-link to="/youth">
+                <router-link to="/sneakers">
                     Sneakers
                 </router-link>
 
@@ -153,9 +153,9 @@ export default {
         </div>
 
         <!-- Filter Button -->
-        <button class="filter-btn" @click="$emit('toggle-filters')">
+        <!-- <button class="filter-btn" @click="$emit('toggle-filters')">
             Filters
-        </button>
+        </button> -->
     </header>
 </template>
 
@@ -227,8 +227,14 @@ export default {
     left: 0;
 }
 
+ @media(max-width:800px){
+    .introText {
+        visibility: hidden;
+    }
+}
+
 /* Filter button style */
-.filter-btn {
+/* .filter-btn {
     background-color: #6a0dad;
     color: white;
     padding: 0.4rem 1rem;
@@ -241,18 +247,14 @@ export default {
 
 .filter-btn:hover {
     background-color: #540a91;
-}
+} */
 
-@media(max-width:800px){
-    .introText {
-        visibility: hidden;
-    }
-}
 
+/*
 @media(min-width:801px){
     .filter-btn {
-        display: none; /* Hide on desktop */
+        display: none;
     }
-}
+} */
 /* --------------------------------------------------------------------------------------------- */
 </style>

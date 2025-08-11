@@ -5,9 +5,9 @@ import Register from '../views/Register.vue';
 import Login from '../views/Login.vue';
 import Shop from '../views/Shop.vue';
 import Contact from '../views/Contact.vue';
-import Women from '../views/ShopWomen.vue';
-import Men from '../views/ShopMen.vue';
-import Youth from '../views/ShopYouth.vue';
+import Tops from '../views/ShopTops.vue';
+import Bottoms from '../views/ShopBottoms.vue';
+import Sneakers from '../views/ShopSneakers.vue';
 import Accessories from '../views/ShopAccessories.vue';
 
 const routes = [
@@ -17,9 +17,9 @@ const routes = [
   { path: '/login', name: 'Login', component: Login },
   { path: '/shop', name: 'Shop', component: Shop },
   { path: '/contact', name: 'Contact', component: Contact },
-  { path: '/women', name: 'Women', component: Women },
-  { path: '/men', name: 'Men', component: Men },
-  { path: '/youth', name: 'Youth', component: Youth },
+  { path: '/tops', name: 'Tops', component: Tops },
+  { path: '/bottoms', name: 'Bottoms', component: Bottoms },
+  { path: '/sneakers', name: 'Sneakers', component: Sneakers },
   { path: '/accessories', name: 'accessories', component: Accessories }
 ];
 

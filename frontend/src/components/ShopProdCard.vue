@@ -74,7 +74,7 @@ export default {
 }
 
 .ProdCard button {
-
+    border: none;
     border-radius: 10px;
     width: 130px;
     height: 40px;
@@ -84,6 +84,7 @@ export default {
     cursor: pointer;
     margin: 10px;
     transition: transform 0.3s ease;
+    padding: 0;
 
     box-shadow:
         /* right shadow */
@@ -134,4 +135,5 @@ export default {
     }
 
 }
+
 </style>

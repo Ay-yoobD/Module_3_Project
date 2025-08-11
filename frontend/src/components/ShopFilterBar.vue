@@ -2,15 +2,11 @@
 
     <body>
 
-        <aside id="filterside">
+
+        <aside>
             <div class="ShopContainer">
                 <div class="filterBar">
                     <div class="filterHead">
-                        <button onclick="toggleSide">
-                            <img src="../assets/filter.png" alt="filterbtn">
-
-                        </button>
-
                         <h3 class="display-5">Filters:</h3>
 
                     </div>
@@ -110,6 +106,7 @@ export default {
             minPrice: 100,
             maxPrice: 900,
 
+
         };
 
     },
@@ -117,6 +114,8 @@ export default {
     components: {
         ShopNavBar
     },
+
+
 
     watch: {
         minPrice(Num) {
@@ -143,37 +142,7 @@ export default {
 }
 
 /* --------------------------------Filter Bar CSS Styling:-------------------------------------- */
-button {
-    height: 51.95px;
-    width: 51.9px;
-    border: none;
-    background-color: white;
 
-}
-
-button img {
-    height: 51.95px;
-    width: 51.9px;
-
-}
-
-.filterHead {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.filterHead h3 {
-    margin: 0;
-}
-
-.filterSide {
-    height: calc(100vh - 60px);
-    top: 60px;
-    position: sticky;
-    grid-area: sidebar;
-    border-right: 3px solid black;
-}
 
 .filterBar {
     width: 250px;
@@ -193,6 +162,32 @@ button img {
 
 .filterBar h3 {
     width: 100px
+}
+
+/* Filter Button Styling */
+.filter-btn-container {
+    display: none;
+    /* hidden on desktop */
+    padding: 0.5rem;
+    background: #f8f8f8;
+    text-align: center;
+}
+
+.filter-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(to right, #3315dec4, rgb(54, 142, 237));
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.filter-toggle img {
+    width: 20px;
+    height: 20px;
 }
 
 .PriceRangeFilter input {
@@ -233,6 +228,31 @@ button img {
 
 
 }
+
+button {
+    height: 51.95px;
+    width: 51.9px;
+    border: none;
+    background-color: white;
+
+}
+
+button img {
+    height: 51.95px;
+    width: 51.9px;
+
+}
+
+.filterHead {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filterHead h3 {
+    margin: 0;
+}
+
 
 /* --------------------------------------------------------------------------------------------- */
 </style>
