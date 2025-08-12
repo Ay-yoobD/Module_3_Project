@@ -5,14 +5,56 @@
                 src="https://img.kwcdn.com/product/Fancyalgo/VirtualModelMatting/41afc2867b6489330d4144f4be120756.jpg?imageView2/2/w/800/q/70/format/webp"
                 alt="productImg">
             <div class="scrollwrapper">
-                <h3 class="ProdText scrolltext">Prod Name Here</h3>
+                <h3 class="ProdText scrolltext"> product.title </h3>
 
             </div>
-            <p class="lead ProdText">Some Details Here</p>
-            <p class="fw-lighter ProdText">Pricing details go here</p>
-            <button>More Details btn</button>
+            <p class="fw-lighter ProdText">R product.price </p>
+            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#productModal">
+                View Product
+            </button>
         </div>
 
+    </div>
+    <!-- <div class="ProductCardView">
+        <div class="ProdCard">
+            <img class="imgprod"
+                src="https://img.kwcdn.com/product/Fancyalgo/VirtualModelMatting/41afc2867b6489330d4144f4be120756.jpg?imageView2/2/w/800/q/70/format/webp"
+                alt="productImg">
+            <div class="scrollwrapper">
+                <h3 class="ProdText scrolltext">{{ product.title }}</h3>
+
+            </div>
+            <p class="lead ProdText">{{ product.description }}</p>
+            <p class="fw-lighter ProdText">R{{ product.price }}</p>
+            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#productModal">
+                View Product
+            </button>
+        </div>
+
+    </div> -->
+
+        <!-- --------------------------- Modal----------------------------------------------------------- -->
+    <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content custom-blur">
+                <div class="modal-header prodinfoheading  border-0 m-2">
+                    <h5 class="modal-title " id="productModalLabel">Product Name</h5>
+
+                </div>
+                <div class="modal-body text-center m-3">
+                    <img src="https://img.kwcdn.com/product/Fancyalgo/VirtualModelMatting/41afc2867b6489330d4144f4be120756.jpg?imageView2/2/w/800/q/70/format/webp" alt="Product Image" class="prodimg2">
+                    <p class="fs-5 fw-bold">$99.99</p>
+                    <p class="text-muted my-2">
+                        Detailed description of the product goes here. You can mention fabric, size, fit, and other
+                        info.
+                    </p>
+                </div>
+                <div class="modal-footer border-0  justify-content-between">
+                    <button type="button" class="btnClose " data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btnAddToCart "><span>Add to Cart</span></button>
+                </div>
+            </div>
+        </div>
     </div>
 
 
@@ -21,12 +63,13 @@
 <script>
 export default {
     name: "ShopProdCard",
+
 };
 
 
 </script>
 
-<style>
+<style scoped>
 /* ----------------------------------------Product Card CSS------------------------------------- */
 
 .ProductCardView {
@@ -64,13 +107,15 @@ export default {
 }
 
 .ProdText {
-    padding-bottom: 10px;
+    padding-bottom: 8px;
+    margin-left: 5px;
 }
 
 .imgprod {
     width: 120px;
     height: auto;
     margin-bottom: 10px;
+    object-fit: cover;
 }
 
 .ProdCard button {
@@ -84,7 +129,6 @@ export default {
     cursor: pointer;
     margin: 10px;
     transition: transform 0.3s ease;
-    padding: 0;
 
     box-shadow:
         /* right shadow */
@@ -107,6 +151,7 @@ export default {
     overflow: hidden;
     position: relative;
     white-space: nowrap;
+    margin-left: 5px;
     mask-image: linear-gradient(to right, black 85%, transparent);
     -webkit-mask-image: linear-gradient(to right, black 85%, transparent);
 
@@ -136,4 +181,102 @@ export default {
 
 }
 
+
+
+/* ------------------------------------Modal Styling:------------------------------------------ */
+
+#productModal {
+    z-index: 99999999;
+
+}
+
+.modal-dialog {
+    margin: 0 auto;
+
+}
+
+.modal-backdrop.show {
+    backdrop-filter: blur(6px);
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.prodimg2 {
+    object-fit: contain;
+    height: 400px;
+    width: 400px;
+}
+
+
+.btnClose {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    height: 40px;
+    width: 100px;
+    margin: 10px;
+    border-radius: 8px !important;
+}
+
+.btnAddToCart {
+    background: linear-gradient(135deg, #3315dec4, rgb(54, 142, 237)) !important;
+    border-radius: 8px !important;
+    box-shadow:
+        /* right shadow */
+        6px 0px 10px -1px rgba(25, 96, 250, 0.414),
+        /* left shadow */
+        -4px 0px 3.5px -2px rgba(152, 30, 246, 0.414),
+        /* top shadow */
+        0px -4px 3.5px -2px rgba(152, 30, 246, 0.414),
+        /* bottom shadow */
+        0px 6px 8px -1px rgba(25, 96, 250, 0.414);
+
+    color: rgb(255, 255, 255);
+    border: none;
+    height: 40px;
+    width: 100px;
+    margin: 10px;
+    position: relative;
+    transition: box-shadow .7s;
+
+}
+
+.btnAddToCart:hover {
+    box-shadow:
+        /* right shadow */
+        6px 0px 10px -1px rgba(152, 30, 246, 0.414),
+        /* left shadow */
+        -4px 0px 3.5px -2px rgba(25, 96, 250, 0.414),
+        /* top shadow */
+        0px -4px 3.5px -2px rgba(25, 96, 250, 0.414),
+        /* bottom shadow */
+        0px 6px 8px -1px rgba(152, 30, 246, 0.414);
+
+
+}
+
+.btnAddToCart::before {
+    content: '';
+    position: absolute;
+    border-radius: 8px !important;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(135deg, rgba(54, 213, 237, 0.751), #7d15dea1) !important;
+    opacity: 0;
+    transition: opacity 0.8s ease-in;
+    color: white;
+
+}
+
+.btnAddToCart:hover::before {
+    opacity: 1;
+
+}
+
+.btnAddToCart>span {
+    position: relative;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 </style>

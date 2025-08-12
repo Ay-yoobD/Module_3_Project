@@ -131,7 +131,7 @@ export default {
         <div class="center-container">
             <nav class="nav-links">
                 <router-link to="/shop">
-                    Featured
+                    New Arrivals
                 </router-link>
 
                 <router-link to="/tops">
@@ -173,11 +173,12 @@ export default {
     align-items: center;
     justify-content: space-between;
     height: 60px;
-    background-color: #111;
+    background: linear-gradient(90deg, #3B82F6, #8B5CF6, #EC4899);
     padding: 0 2rem;
     font-family: Playfair-Display;
     font-size: 18px;
     z-index: 9999;
+    border-radius: 0 0 18px 18px ;
 }
 
 .introText {

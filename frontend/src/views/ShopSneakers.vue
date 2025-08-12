@@ -38,7 +38,6 @@ export default {
 </script>
 
 <style scoped>
-
 /* -----------------------------------------Grid CSS-------------------------------------------- */
 
 * {
@@ -77,31 +76,31 @@ aside {
 }
 
 @media (max-width: 900px) {
-  body {
-    grid-template-columns: 1fr; /* full width for main content */
-    grid-template-areas:
-      "navbar"
-      "main";
-  }
+    body {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "navbar"
+            "main";
+    }
 
-  aside {
-    position: fixed;
-    top: 60px;
-    left: 0;
-    width: 250px;
-    height: calc(100dvh - 60px);
-    background: white;
-    transform: translateX(-100%);
-    z-index: 9998;
-  }
+    aside {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 250px;
+        height: calc(100dvh - 60px);
+        background: white;
+        transform: translateX(-100%);
+        z-index: 9998;
+    }
 
-  aside.show {
-    transform: translateX(0);
-  }
+    aside.show {
+        transform: translateX(0);
+    }
 
-  .filter-btn-container {
-    display: block; /* show button on mobile */
-  }
+    .filter-btn-container {
+        display: block;
+    }
 }
 
 main {

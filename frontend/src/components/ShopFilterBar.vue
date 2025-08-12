@@ -2,8 +2,7 @@
 
     <body>
 
-
-        <aside>
+        <aside id="filterside" :class="{ show: isFilterOpen }" class="PageTargetter">
             <div class="ShopContainer">
                 <div class="filterBar">
                     <div class="filterHead">
@@ -77,8 +76,6 @@
 
                                 </ul>
 
-
-
                             </div>
 
                         </li>
@@ -88,12 +85,10 @@
                 </div>
 
             </div>
+
         </aside>
 
-
-
     </body>
-
 
 </template>
 
@@ -143,7 +138,6 @@ export default {
 
 /* --------------------------------Filter Bar CSS Styling:-------------------------------------- */
 
-
 .filterBar {
     width: 250px;
     overflow-y: auto;
@@ -164,10 +158,8 @@ export default {
     width: 100px
 }
 
-/* Filter Button Styling */
 .filter-btn-container {
     display: none;
-    /* hidden on desktop */
     padding: 0.5rem;
     background: #f8f8f8;
     text-align: center;
@@ -189,6 +181,32 @@ export default {
     width: 20px;
     height: 20px;
 }
+
+
+button {
+    height: 51.95px;
+    width: 51.9px;
+    border: none;
+    background-color: white;
+
+}
+
+button img {
+    height: 51.95px;
+    width: 51.9px;
+
+}
+
+.filterHead {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filterHead h3 {
+    margin: 0;
+}
+
 
 .PriceRangeFilter input {
     -webkit-appearance: none;
@@ -228,31 +246,6 @@ export default {
 
 
 }
-
-button {
-    height: 51.95px;
-    width: 51.9px;
-    border: none;
-    background-color: white;
-
-}
-
-button img {
-    height: 51.95px;
-    width: 51.9px;
-
-}
-
-.filterHead {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.filterHead h3 {
-    margin: 0;
-}
-
 
 /* --------------------------------------------------------------------------------------------- */
 </style>
