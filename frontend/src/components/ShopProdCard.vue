@@ -8,7 +8,7 @@
                 <h3 class="ProdText scrolltext"> product.title </h3>
 
             </div>
-            <p class="fw-lighter ProdText">R product.price </p>
+            <p class="fw-light ProdText">R product.price </p>
             <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#productModal">
                 View Product
             </button>

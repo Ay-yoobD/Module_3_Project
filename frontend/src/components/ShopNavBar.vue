@@ -125,7 +125,7 @@ export default {
 <template>
     <header class="header">
         <div class="introText">
-            Select an option:
+            Browse options:
         </div>
 
         <div class="center-container">
@@ -184,6 +184,7 @@ export default {
 .introText {
     font-weight: bold;
     color: rgb(255, 255, 255);
+    font-family: FontInter;
 }
 
 .center-container {
@@ -205,6 +206,7 @@ export default {
     padding: 0.5rem;
     font-weight: 500;
     transition: color 0.3s ease;
+    font-family: FontInter;
 }
 
 .nav-links a::after {

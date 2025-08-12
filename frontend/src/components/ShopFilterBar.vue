@@ -66,19 +66,6 @@
                             </div>
 
                         </li>
-                        <br>
-                        <li>
-                            In Stock?
-                            <div class="StockFilter">
-                                <ul>
-                                    <li> <input type="radio" name="stock" value="StockAvailable"> Stock Available</li>
-                                    <li><input type="radio" name="stock" value="StockUnavailable"> Out of Stock</li>
-
-                                </ul>
-
-                            </div>
-
-                        </li>
 
                     </ul>
 
@@ -134,6 +121,7 @@ export default {
 * {
     margin: 0;
     padding: 0;
+    font-family: FontInter;
 }
 
 /* --------------------------------Filter Bar CSS Styling:-------------------------------------- */
