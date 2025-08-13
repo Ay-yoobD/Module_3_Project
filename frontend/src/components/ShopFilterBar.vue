@@ -157,7 +157,8 @@ export default {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: linear-gradient(to right, #3315dec4, rgb(54, 142, 237));
+    /* background: linear-gradient(to right, #3315dec4, rgb(54, 142, 237)); */
+      background: linear-gradient(100deg, #000000, #3b3b3c, #f9750f);
     color: white;
     border: none;
     padding: 0.5rem 1rem;
@@ -200,16 +201,27 @@ button img {
     -webkit-appearance: none;
     appearance: none;
     background-color: linear-gradient(to right, #3315dec4, rgb(54, 142, 237));
+      /* background: linear-gradient(100deg, #000000, #3b3b3c, #f9750f); */
 }
 
 .PriceRangeFilter input::-webkit-slider-runnable-track {
     background: linear-gradient(to right, #3315dec4, rgb(54, 142, 237));
-    border-radius: 5px;
+      /* background: linear-gradient(100deg, #000000, #3b3b3c, #f9750f); */
+    border-radius: 50px;
     height: 6px;
+    /* box-shadow:
+        /* right shadow *
+        6px 0px 10px -1px rgba(250, 141, 25, 0.738),
+        /* left shadow *
+        -4px 0px 3.5px -2px rgba(22, 22, 22, 0.738),
+        /* top shadow *
+        0px -4px 3.5px -2px rgba(22, 22, 22, 0.738),
+        /* bottom shadow *
+        0px 6px 8px -1px rgba(250, 141, 25,0.738)  ; */
     box-shadow:
         /* right shadow */
         6px 0px 10px -1px rgba(25, 96, 250, 0.414),
-        /* left shadow */
+        /* left shadow*/ 
         -4px 0px 3.5px -2px rgba(152, 30, 246, 0.414),
         /* top shadow */
         0px -4px 3.5px -2px rgba(152, 30, 246, 0.414),
@@ -226,8 +238,9 @@ button img {
     width: 15px;
     height: 15px;
     background: linear-gradient(to right, #3315de, rgb(54, 142, 237));
-    border: solid black 2px;
-    border-radius: 50%;
+    /* background: linear-gradient(100deg, #000000, #3b3b3c, #f9750f); */
+    border: solid rgb(255, 255, 255) 2px;
+    border-radius: 50px;
     cursor: pointer;
     margin-top: -4px;
     transition: background 0.3s;

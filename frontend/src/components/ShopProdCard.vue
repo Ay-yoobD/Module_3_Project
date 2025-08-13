@@ -93,6 +93,16 @@ export default {
     align-items: center;
     border-radius: 15px;
 
+        /* box-shadow:
+        /* right shadow *
+        6px 0px 10px -1px rgba(250, 141, 25, 0.738),
+        /* left shadow *
+        -4px 0px 3.5px -2px rgba(22, 22, 22, 0.738),
+        /* top shadow *
+        0px -4px 3.5px -2px rgba(22, 22, 22, 0.738),
+        /* bottom shadow *
+        0px 6px 8px -1px rgba(250, 141, 25,0.738)  ; */
+
     box-shadow:
         /* right shadow */
         6px 0px 10px -1px rgba(25, 96, 250, 0.414),
@@ -124,11 +134,22 @@ export default {
     width: 130px;
     height: 40px;
     background: linear-gradient(to right, #3315dec4, rgb(54, 142, 237));
+/* background: linear-gradient(100deg, #000000, #3b3b3c, #f9750f); */
     color: white;
     justify-self: center;
     cursor: pointer;
     margin: 10px;
     transition: transform 0.3s ease;
+/* 
+        box-shadow:
+        /* right shadow 
+        6px 0px 10px -1px rgba(250, 141, 25, 0.738),
+        /* left shadow *
+        -4px 0px 3.5px -2px rgba(22, 22, 22, 0.738),
+        /* top shadow *
+        0px -4px 3.5px -2px rgba(22, 22, 22, 0.738),
+        /* bottom shadow *
+        0px 6px 8px -1px rgba(250, 141, 25,0.738)  ; */
 
     box-shadow:
         /* right shadow */
@@ -219,8 +240,9 @@ export default {
 
 .btnAddToCart {
     background: linear-gradient(135deg, #3315dec4, rgb(54, 142, 237)) !important;
+    /* background: linear-gradient(100deg, #000000, #3b3b3c, #f9750f); */
     border-radius: 8px !important;
-    box-shadow:
+     box-shadow:
         /* right shadow */
         6px 0px 10px -1px rgba(25, 96, 250, 0.414),
         /* left shadow */
@@ -229,6 +251,16 @@ export default {
         0px -4px 3.5px -2px rgba(152, 30, 246, 0.414),
         /* bottom shadow */
         0px 6px 8px -1px rgba(25, 96, 250, 0.414);
+
+            /* box-shadow:
+        /* right shadow *
+        6px 0px 10px -1px rgba(250, 141, 25, 0.738),
+        /* left shadow *
+        -4px 0px 3.5px -2px rgba(22, 22, 22, 0.738),
+        /* top shadow *
+        0px -4px 3.5px -2px rgba(22, 22, 22, 0.738),
+        /* bottom shadow *
+        0px 6px 8px -1px rgba(250, 141, 25,0.738)  ; */
 
     color: rgb(255, 255, 255);
     border: none;
@@ -250,6 +282,16 @@ export default {
         0px -4px 3.5px -2px rgba(25, 96, 250, 0.414),
         /* bottom shadow */
         0px 6px 8px -1px rgba(152, 30, 246, 0.414);
+/* 
+                    box-shadow:
+        /* right shadow *
+        6px 0px 10px -1px rgba(22, 22, 22, 0.738),
+        /* left shadow *
+        -4px 0px 3.5px -2px rgba(250, 141, 25, 0.738),
+        /* top shadow *
+        0px -4px 3.5px -2px rgba(250, 141, 25, 0.738) ,
+        /* bottom shadow *
+        0px 6px 8px -1px rgba(22, 22, 22, 0.738)  ; */
 
 
 }
@@ -263,6 +305,7 @@ export default {
     height: 100%;
     width: 100%;
     background: linear-gradient(135deg, rgba(54, 213, 237, 0.751), #7d15dea1) !important;
+    
     opacity: 0;
     transition: opacity 0.8s ease-in;
     color: white;

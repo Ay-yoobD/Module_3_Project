@@ -40,6 +40,7 @@ export default {
 * {
     margin: 0;
     padding: 0;
+    font-family: FontInter;
 }
 
 body {
@@ -53,18 +54,20 @@ body {
 }
 
 nav {
-    top: 0;
     grid-area: navbar;
+    
+    top: 0;
     position: sticky;
     z-index: 9999;
 
 }
 
 aside {
+    grid-area: sidebar;
+
     height: calc(100dvh - 60px);
     top: 60px;
     position: sticky;
-    grid-area: sidebar;
     border-right: none;
     border-radius: 8px;
     box-shadow: 6px 0 5px 0px rgba(0, 0, 0, 0.15);
@@ -102,6 +105,7 @@ aside {
 
 main {
     grid-area: main;
+    
     padding: 15px;
 
 }

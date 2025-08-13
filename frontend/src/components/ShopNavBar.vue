@@ -173,6 +173,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     height: 60px;
+    /* background: linear-gradient(100deg, #000000, #3b3b3c, #f9750f); */
     background: linear-gradient(90deg, #3B82F6, #8B5CF6, #EC4899);
     padding: 0 2rem;
     font-family: Playfair-Display;

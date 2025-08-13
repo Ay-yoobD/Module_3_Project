@@ -25,12 +25,6 @@ CREATE TABLE IF NOT EXISTS products (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Updating products with new coloumns:
-ALTER TABLE `fashion_store`.`products` 
-ADD COLUMN `gender` VARCHAR(6) NULL AFTER `created_at`,
-ADD COLUMN `style` VARCHAR(50) NULL AFTER `gender`;
-
-
 -- products table (5 per category)
 
 INSERT INTO products (title, description, price, image, category, is_featured)
@@ -92,25 +86,3 @@ UPDATE products SET image = 'https://images.unsplash.com/photo-1584917865442-de8
 UPDATE products SET image = 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80' WHERE id = 18; -- Chain Necklace
 UPDATE products SET image = 'https://images.unsplash.com/photo-1534215754734-18e55d13e346?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80' WHERE id = 19; -- Bucket Hat
 UPDATE products SET image = 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80' WHERE id = 20; -- Crossbody Bag
-
--- Updating New Product catergories:
-UPDATE `fashion_store`.`products` SET `gender` = 'Female', `style` = 'Sporty' WHERE (`id` = '13');
-UPDATE `fashion_store`.`products` SET `gender` = 'Male', `style` = 'Casual' WHERE (`id` = '14');
-UPDATE `fashion_store`.`products` SET `gender` = 'Female', `style` = 'Casual' WHERE (`id` = '15');
-UPDATE `fashion_store`.`products` SET `gender` = 'Female', `style` = 'Sporty' WHERE (`id` = '9');
-UPDATE `fashion_store`.`products` SET `gender` = 'Female', `style` = 'Casual' WHERE (`id` = '1');
-UPDATE `fashion_store`.`products` SET `gender` = 'Male', `style` = 'Casual' WHERE (`id` = '2');
-UPDATE `fashion_store`.`products` SET `gender` = 'Male', `style` = 'Casual' WHERE (`id` = '3');
-UPDATE `fashion_store`.`products` SET `gender` = 'Male', `style` = 'Casual' WHERE (`id` = '4');
-UPDATE `fashion_store`.`products` SET `gender` = 'Male', `style` = 'Casual' WHERE (`id` = '5');
-UPDATE `fashion_store`.`products` SET `gender` = 'Female', `style` = 'Casual' WHERE (`id` = '6');
-UPDATE `fashion_store`.`products` SET `gender` = 'Female', `style` = 'Casual' WHERE (`id` = '7');
-UPDATE `fashion_store`.`products` SET `gender` = 'Female', `style` = 'Casual' WHERE (`id` = '8');
-UPDATE `fashion_store`.`products` SET `gender` = 'Female', `style` = 'Formal-Casual' WHERE (`id` = '10');
-UPDATE `fashion_store`.`products` SET `gender` = 'Male', `style` = 'Casual' WHERE (`id` = '11');
-UPDATE `fashion_store`.`products` SET `gender` = 'Male', `style` = 'Casual' WHERE (`id` = '12');
-UPDATE `fashion_store`.`products` SET `gender` = 'Male', `style` = 'Formal' WHERE (`id` = '16');
-UPDATE `fashion_store`.`products` SET `gender` = 'Male', `style` = 'Formal-Casual' WHERE (`id` = '17');
-UPDATE `fashion_store`.`products` SET `gender` = 'Male', `style` = 'Casual' WHERE (`id` = '18');
-UPDATE `fashion_store`.`products` SET `gender` = 'Female', `style` = 'Casual' WHERE (`id` = '19');
-UPDATE `fashion_store`.`products` SET `gender` = 'Female', `style` = 'Casual' WHERE (`id` = '20');
