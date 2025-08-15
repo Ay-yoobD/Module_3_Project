@@ -9,10 +9,15 @@
                         <h3 class="display-5">Filters:</h3>
 
                     </div>
-
+                        <hr style="width: 200px; margin-left: 15px;" class="my-2">
+                        
                     <ul>
                         <li>
-                            Type:
+                            <h4>
+                                Type:
+
+                            </h4>
+                            
                             <div class="TypeFilter">
                                 <ul>
                                     <li><input type="radio" name="type" value="Men"> Men</li>
@@ -26,7 +31,11 @@
                         </li>
                         <br>
                         <li>
-                            Style
+                            <h4>
+                                Style:
+
+                            </h4>
+
                             <div class="StyleFilter">
                                 <ul>
                                     <li><input type="radio" name="style" value="Casual"> Casual</li>
@@ -40,7 +49,11 @@
                         </li>
                         <br>
                         <li>
-                            Price
+                            <h4>
+                                Price:
+
+                            </h4>
+                            
                             <div class="PriceRangeFilter">
                                 <ul>
                                     <li>
