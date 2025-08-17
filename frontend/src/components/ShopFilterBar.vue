@@ -252,7 +252,7 @@ button img {
     height: 15px;
     background: linear-gradient(to right, #3315de, rgb(54, 142, 237));
     /* background: linear-gradient(100deg, #000000, #3b3b3c, #f9750f); */
-    border: solid rgb(255, 255, 255) 2px;
+    border: solid rgb(0, 0, 0) 2.5px;
     border-radius: 50px;
     cursor: pointer;
     margin-top: -4px;

@@ -17,8 +17,14 @@
         <aside id="filterside" :class="{ show: isFilterOpen }" class="PageTargetter">
             <ShopFilterBar />
         </aside>
+
         <main>
-            <ShopProdCard />
+            <!-- Loop through products -->
+            <div class="products-grid">
+                <ShopProdCard v-for="prod in products" :key="prod.id" :product="prod" />
+
+            </div>
+
         </main>
 
     </body>
@@ -30,48 +36,40 @@ import ShopNavBar from "../components/ShopNavBar.vue";
 import ShopFilterBar from "../components/ShopFilterBar.vue";
 import ShopProdCard from "@/components/ShopProdCard.vue";
 
-
-
-
 export default {
-    data() {
-        return {
-            minPrice: 100,
-            maxPrice: 900,
-            isFilterOpen: false
-
-        };
-
-    },
-
     components: {
         ShopNavBar,
         ShopFilterBar,
         ShopProdCard
 
     },
+    data() {
+        return {
+            isFilterOpen: false,
+            products: [] 
 
+        };
+
+    },
     methods: {
         toggleSide() {
             this.isFilterOpen = !this.isFilterOpen;
+        },
+
+        async loadProducts() {
+            await this.$store.dispatch("getProducts");
+            this.products = this.$store.state.products; 
+            
         }
+
     },
 
-    watch: {
-        minPrice(Num) {
-            if (Num >= +this.maxPrice) {
-                this.minPrice = +this.maxPrice - 5;
-            }
-        },
-        maxPrice(Num) {
-            if (Num <= +this.minPrice) {
-                this.maxPrice = +this.minPrice + 5;
-            }
-        },
-    },
+    mounted() {
+        this.loadProducts();
 
-}
+    }
 
+};
 
 </script>
 
@@ -150,6 +148,4 @@ main {
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-
 </style>

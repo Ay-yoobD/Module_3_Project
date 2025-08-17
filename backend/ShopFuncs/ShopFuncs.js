@@ -2,7 +2,7 @@ const db = require('../db/db.js');
 
 const LoadProds = () => {
   return new Promise((resolve, reject) => {
-    db.query('SELECT * FROM products', (err, results) => {
+    db.query('SELECT * FROM products WHERE category = "Tops";', (err, results) => {
       if (err) return reject(err);
       resolve(results);
     });
