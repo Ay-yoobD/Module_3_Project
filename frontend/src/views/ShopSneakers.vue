@@ -7,33 +7,66 @@
             <ShopNavBar />
         </nav>
 
-        <!-- Filter Button (only visible on mobile) -->
-        
-        <aside >
-            <ShopFilterBar/>
+        <div class="filter-btn-container" style="top:60px">
+            <button class="filter-toggle" @click="toggleSide">
+                <img src="../assets/filter.png" alt="filterbtn">
+            </button>
+        </div>
+        <aside id="filterside" :class="{ show: isFilterOpen }" class="PageTargetter">
+            <ShopFilterBar />
         </aside>
+
         <main>
-          <ShopProdCard/>
+            <div class="ProductCardView">
+                <ShopProdCard v-for="prod in products" :key="prod.id" :product="prod" />
+
+            </div>
+
         </main>
 
-
     </body>
+
 </template>
 
 <script>
-import ShopFilterBar from "@/components/ShopFilterBar.vue";
 import ShopNavBar from "../components/ShopNavBar.vue";
+import ShopFilterBar from "../components/ShopFilterBar.vue";
 import ShopProdCard from "@/components/ShopProdCard.vue";
 
 export default {
-  components: {
-    ShopNavBar,
-    ShopFilterBar,
-    ShopProdCard
-  }
+    components: {
+        ShopNavBar,
+        ShopFilterBar,
+        ShopProdCard
 
-}
+    },
+    data() {
+        return {
+            isFilterOpen: false,
+            products: [] 
 
+        };
+
+    },
+    methods: {
+        toggleSide() {
+            this.isFilterOpen = !this.isFilterOpen;
+        },
+
+        async loadProducts() {
+            await this.$store.dispatch("getProductsSneakers");
+            this.products = this.$store.state.products; 
+            
+        }
+
+    },
+
+    mounted() {
+        this.loadProducts();
+
+    }
+
+};
 
 </script>
 
@@ -107,6 +140,17 @@ aside {
 main {
     grid-area: main;
     padding: 15px;
+
+}
+
+.ProductCardView {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+
 
 }
 

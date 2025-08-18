@@ -7,8 +7,6 @@
             <ShopNavBar />
         </nav>
 
-        <!-- Filter Button (only visible on mobile) -->
-
         <div class="filter-btn-container" style="top:60px">
             <button class="filter-toggle" @click="toggleSide">
                 <img src="../assets/filter.png" alt="filterbtn">
@@ -19,8 +17,7 @@
         </aside>
 
         <main>
-            <!-- Loop through products -->
-            <div class="products-grid">
+            <div class="ProductCardView">
                 <ShopProdCard v-for="prod in products" :key="prod.id" :product="prod" />
 
             </div>
@@ -57,7 +54,7 @@ export default {
         },
 
         async loadProducts() {
-            await this.$store.dispatch("getProducts");
+            await this.$store.dispatch("getProductsTops");
             this.products = this.$store.state.products; 
             
         }
@@ -144,6 +141,18 @@ aside {
 main {
     grid-area: main;
     padding: 15px;
+    
+    
+    
+}
+.ProductCardView {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+
 
 }
 

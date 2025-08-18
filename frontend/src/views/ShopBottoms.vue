@@ -1,16 +1,28 @@
 <template>
-
     <body>
-
-
         <nav>
             <ShopNavBar />
+            
         </nav>
-        <aside id="filterside">
+
+        <div class="filter-btn-container" style="top:60px">
+            <button class="filter-toggle" @click="toggleSide">
+                <img src="../assets/filter.png" alt="filterbtn">
+
+            </button>
+
+        </div>
+
+        <aside id="filterside" :class="{ show: isFilterOpen }" class="PageTargetter">
             <ShopFilterBar />
+
         </aside>
+
         <main>
-            <ShopProdCard />
+            <div class="ProductCardView">
+                <ShopProdCard v-for="prod in products" :key="prod.id" :product="prod" />
+
+            </div>
 
         </main>
 
@@ -28,6 +40,30 @@ export default {
         ShopNavBar,
         ShopFilterBar,
         ShopProdCard
+
+    },
+
+    data() {
+        return {
+            products: []
+        }
+    },
+        
+    methods: {
+        toggleSide() {
+            this.isFilterOpen = !this.isFilterOpen;
+        },
+
+        async loadProducts() {
+            await this.$store.dispatch("getProductsBottoms");
+            this.products = this.$store.state.products; 
+            
+        }
+
+    },
+
+    mounted() {
+        this.loadProducts();
 
     }
 
@@ -107,7 +143,18 @@ main {
     grid-area: main;
     padding: 15px;
 
+    .ProductCardView {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+
+    }
 }
+
+
 
 /* --------------------------------------------------------------------------------------------- */
 </style>

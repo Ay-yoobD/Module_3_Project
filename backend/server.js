@@ -13,8 +13,20 @@ app.use(bodyParser.json());
 const authRoutes = require('./routes/auth');
 app.use('/api/auth', authRoutes);
 
-const { LoadProdsCon } = require('./ShopFuncs/ShopFuncs.js');
-app.get('/products/load', LoadProdsCon);
+const {  LoadProdsTopsCon  } = require('./ShopFuncs/ShopFuncs.js');
+app.get('/products/load/tops',  LoadProdsTopsCon );
+
+const {  LoadProdsBottomsCon } = require('./ShopFuncs/ShopFuncs.js');
+app.get('/products/load/bottoms',  LoadProdsBottomsCon );
+
+const {  LoadProdsSneakersCon } = require('./ShopFuncs/ShopFuncs.js');
+app.get('/products/load/sneakers',  LoadProdsSneakersCon );
+
+const {  LoadProdsAccessoriesCon } = require('./ShopFuncs/ShopFuncs.js');
+app.get('/products/load/accessories',  LoadProdsAccessoriesCon );
+
+const {  LoadProdsFeaturedCon } = require('./ShopFuncs/ShopFuncs.js');
+app.get('/products/load/featured',  LoadProdsFeaturedCon );
 
 // Server start
 const PORT = process.env.PORT || 3000;

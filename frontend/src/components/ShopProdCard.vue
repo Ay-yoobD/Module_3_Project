@@ -1,51 +1,18 @@
 <template>
-    <!-- Reminder to make all product.input all moustache syntax when using data from backend
-    <div class="ProductCardView">
+    <div>
         <div class="ProdCard">
-            <img class="imgprod"
-                src="https://img.kwcdn.com/product/Fancyalgo/VirtualModelMatting/41afc2867b6489330d4144f4be120756.jpg?imageView2/2/w/800/q/70/format/webp"
-                alt="productImg">
-            <div class="scrollwrapper">
-                <h3 class="ProdText scrolltext"> product.title </h3>
-
-            </div>
-            <p class="fw-light ProdText">R product.price </p>
-            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#productModal">
-                View Product
-            </button>
-        </div>
-
-    </div> -->
-    <div class="ProductCardView">
-        <div class="ProdCard">
-            <!-- <img class="imgprod"
-                src="https://img.kwcdn.com/product/Fancyalgo/VirtualModelMatting/41afc2867b6489330d4144f4be120756.jpg?imageView2/2/w/800/q/70/format/webp"
-                alt="productImg"> -->
             <img class="imgprod" :src="product.image" :alt="product.title">
             <div class="scrollwrapper">
                 <h3 class="ProdText scrolltext">{{ product.title }}</h3>
 
             </div>
-            <p class="lead ProdText">{{ product.description }}</p>
-            <p class="fw-lighter ProdText">R{{ product.price }}</p>
+            <p class="fw-light ProdText">R{{ product.price }}</p>
             <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#productModal">
                 View Product
             </button>
         </div>
 
     </div>
-
-    <!-- <div class="ProdCard">
-    <img class="imgprod" :src="product.image" :alt="product.title" />
-    <div class="scrollwrapper">
-      <h3 class="ProdText scrolltext">{{ product.title }}</h3>
-    </div>
-    <p class="fw-light ProdText">R {{ product.price }}</p>
-    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#productModal">
-      View Product
-    </button>
-  </div> -->
-
 
 
     <!-- --------------------------- Modal----------------------------------------------------------- -->
@@ -53,16 +20,14 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content custom-blur">
                 <div class="modal-header prodinfoheading  border-0 m-2">
-                    <h5 class="modal-title " id="productModalLabel">Product Name</h5>
+                    <h5 class="modal-title " id="productModalLabel">{{ product.title }}</h5>
 
                 </div>
                 <div class="modal-body text-center m-3">
-                    <img src="https://img.kwcdn.com/product/Fancyalgo/VirtualModelMatting/41afc2867b6489330d4144f4be120756.jpg?imageView2/2/w/800/q/70/format/webp"
-                        alt="Product Image" class="prodimg2">
-                    <p class="fs-5 fw-bold">$99.99</p>
+                    <img :src="product.image" :alt="product.title" class="prodimg2">
+                    <p class="fs-5 fw-bold">{{ product.price }}</p>
                     <p class="text-muted my-2">
-                        Detailed description of the product goes here. You can mention fabric, size, fit, and other
-                        info.<!--make oustache syntax here as well where necassary-->
+                        {{ product.description }}
                     </p>
                 </div>
                 <div class="modal-footer border-0  justify-content-between">
@@ -90,17 +55,6 @@ export default {
 
 <style scoped>
 /* ----------------------------------------Product Card CSS------------------------------------- */
-
-.ProductCardView {
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
-    flex-wrap: wrap;
-
-
-}
 
 .ProdCard {
 
@@ -136,16 +90,20 @@ export default {
 }
 
 .ProdText {
+    margin-bottom: 5px;
     padding-bottom: 8px;
     margin-left: 5px;
-}
 
+}
+ 
 .imgprod {
-    width: 100px;
-    height: auto;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    object-fit: cover;
+      width: 100%;
+  height: 255px;
+  object-fit: cover;
+    /* Fixed height for all */
+  
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
 }
 
 .ProdCard button {
