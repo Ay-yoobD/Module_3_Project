@@ -30,8 +30,7 @@ ALTER TABLE `fashion_store`.`products`
 ADD COLUMN `gender` VARCHAR(6) NULL AFTER `created_at`,
 ADD COLUMN `style` VARCHAR(50) NULL AFTER `gender`;
 
-ALTER TABLE `fashion_store`.`products` 
-CHANGE COLUMN `gender` `type` VARCHAR(6) NULL DEFAULT NULL ;
+
 
 
 
@@ -118,3 +117,8 @@ UPDATE `fashion_store`.`products` SET `gender` = 'Male', `style` = 'Formal-Casua
 UPDATE `fashion_store`.`products` SET `gender` = 'Male', `style` = 'Casual' WHERE (`id` = '18');
 UPDATE `fashion_store`.`products` SET `gender` = 'Female', `style` = 'Casual' WHERE (`id` = '19');
 UPDATE `fashion_store`.`products` SET `gender` = 'Female', `style` = 'Casual' WHERE (`id` = '20');
+
+-- Altering coloumn Gender to Type
+
+ALTER TABLE `fashion_store`.`products` 
+CHANGE COLUMN `gender` `type` VARCHAR(6) NULL DEFAULT NULL ;

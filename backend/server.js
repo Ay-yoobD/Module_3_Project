@@ -19,6 +19,10 @@ const {
   LoadProdsTopsByTypeCon,
   LoadProdsTopsByStyleCon,
   LoadProdsTopsByPriceCon,
+  LoadProdsBottomsByTypeCon,
+  LoadProdsBottomsByStyleCon,
+  LoadProdsBottomsByPriceCon
+
 } = require('./ShopFuncs/ShopFuncs.js');
 
 const authRoutes = require('./routes/auth');
@@ -44,6 +48,15 @@ app.get('/products/load/tops/type/:type', LoadProdsTopsByTypeCon);
 app.get('/products/load/tops/style/:style', LoadProdsTopsByStyleCon);
 app.get('/products/load/tops/price', LoadProdsTopsByPriceCon); 
 
+app.get('/products/load/bottoms/type/:type', LoadProdsBottomsByTypeCon);
+app.get('/products/load/bottoms/style/:style', LoadProdsBottomsByStyleCon);
+app.get('/products/load/bottoms/price', LoadProdsBottomsByPriceCon); 
+
 // Server start
+app.use((req, res) => {
+  console.log("Unmatched route:", req.method, req.url);
+  res.status(404).json({ error: "Route not found" });
+}); 
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

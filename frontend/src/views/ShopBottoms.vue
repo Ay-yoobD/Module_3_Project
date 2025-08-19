@@ -39,7 +39,9 @@ export default {
   computed: {
     products() {
       return this.$store.state.products; // reactive source of truth
+    
     },
+
   },
 
   methods: {
@@ -49,7 +51,7 @@ export default {
   },
 
   created() {
-    // initial load for Tops
+    // initial load for bottoms
     this.$store.dispatch("getProductsBottoms");
   },
 };

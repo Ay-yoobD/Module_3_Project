@@ -7,7 +7,7 @@ const store = createStore({
   state: {
     user: null,
     products: null,
-     filters: {
+    filters: {
       category: null,
       maxPrice: null,
     },
@@ -17,104 +17,24 @@ const store = createStore({
     setUser(state, payload) {
       state.user = payload;
     },
-    setProds(state, payload) {
-      state.products = payload
-    },
-
-     setProducts(state, products) {
+    setProducts(state, products) {
       state.products = products;
     },
-
-
   },
 
   actions: {
+    // ---------- AUTH ----------
     async register({ commit }, userData) {
-      const res = await axios.post('http://localhost:3000/api/auth/register', userData);
+      const res = await axios.post(`${API}/api/auth/register`, userData);
       return res.data;
     },
     async login({ commit }, credentials) {
-      const res = await axios.post('http://localhost:3000/api/auth/login', credentials);
+      const res = await axios.post(`${API}/api/auth/login`, credentials);
       commit('setUser', res.data.user);
       return res.data;
     },
 
-    async getProductsTops({ commit }) {
-      try {
-        let data = await axios.get('http://localhost:3000/products/load/tops')
-        console.log(data.data.prods)
-
-        commit('setProds', data.data.prods)
-
-      } catch (error) {
-        console.error('Failed to fetch products:', error)
-        alert('Error loading products. Please try again later.')
-
-      }
-
-    },
-
-    async getProductsBottoms({ commit }) {
-      try {
-        let data = await axios.get('http://localhost:3000/products/load/bottoms')
-        console.log(data.data.prods)
-
-        commit('setProds', data.data.prods)
-
-      } catch (error) {
-        console.error('Failed to fetch products:', error)
-        alert('Error loading products. Please try again later.')
-
-      }
-
-    },
-
-    async getProductsSneakers({ commit }) {
-      try {
-        let data = await axios.get('http://localhost:3000/products/load/sneakers')
-        console.log(data.data.prods)
-
-        commit('setProds', data.data.prods)
-
-      } catch (error) {
-        console.error('Failed to fetch products:', error)
-        alert('Error loading products. Please try again later.')
-
-      }
-
-    },
-
-    async getProductsAccessories({ commit }) {
-      try {
-        let data = await axios.get('http://localhost:3000/products/load/accessories')
-        console.log(data.data.prods)
-
-        commit('setProds', data.data.prods)
-
-      } catch (error) {
-        console.error('Failed to fetch products:', error)
-        alert('Error loading products. Please try again later.')
-
-      }
-
-    },
-
-    async getProductsFeatured({ commit }) {
-      try {
-        let data = await axios.get('http://localhost:3000/products/load/featured')
-        console.log(data.data.prods)
-
-        commit('setProds', data.data.prods)
-
-      } catch (error) {
-        console.error('Failed to fetch products:', error)
-        alert('Error loading products. Please try again later.')
-
-      } 
-
-    },
-
-     // ----------- BASE LOADERS -----------
+    // ---------- BASE LOADERS ----------
     async getProductsTops({ commit }) {
       const { data } = await axios.get(`${API}/products/load/tops`);
       commit('setProducts', data.prods);
@@ -136,7 +56,7 @@ const store = createStore({
       commit('setProducts', data.prods);
     },
 
-    // ----------- SERVER-SIDE FILTERS (TOPS) -----------
+    // ---------- SERVER-SIDE FILTERS (TOPS) ----------
     async getTopsByType({ commit }, type) {
       const { data } = await axios.get(`${API}/products/load/tops/type/${type}`);
       commit('setProducts', data.prods);
@@ -153,13 +73,27 @@ const store = createStore({
       commit('setProducts', data.prods);
     },
 
+    // ---------- SERVER-SIDE FILTERS (BOTTOMS) ----------
+    async getBottomsByType({ commit }, type) {
+      const { data } = await axios.get(`${API}/products/load/bottoms/type/${type}`);
+      commit('setProducts', data.prods);
+    },
+    async getBottomsByStyle({ commit }, style) {
+      const { data } = await axios.get(`${API}/products/load/bottoms/style/${style}`);
+      commit('setProducts', data.prods);
+    },
+    async getBottomsByPrice({ commit }, { min, max }) {
+      const params = new URLSearchParams();
+      if (min != null) params.set('min', min);
+      if (max != null) params.set('max', max);
+      const { data } = await axios.get(`${API}/products/load/bottoms/price?${params.toString()}`);
+      commit('setProducts', data.prods);
+    },
   },
 
   getters: {
-    isLoggedIn: state => !!state.user,
+    isLoggedIn: (state) => !!state.user,
   },
-  
-}
-);
+});
 
 export default store;

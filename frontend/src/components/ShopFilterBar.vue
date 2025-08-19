@@ -108,19 +108,25 @@ export default {
       if (this.selectedGender) {
         this.$store.dispatch('getTopsByType', this.selectedGender);
       }
+
     },
+
     applyStyle() {
       if (this.selectedStyle) {
         this.$store.dispatch('getTopsByStyle', this.selectedStyle);
       }
+
     },
+    
     applyPrice() {
       // keep sliders valid
       if (this.minPrice >= this.maxPrice) {
         this.minPrice = this.maxPrice - 5;
       }
       this.$store.dispatch('getTopsByPrice', { min: this.minPrice, max: this.maxPrice });
+
     },
+
     resetFilters() {
       this.selectedGender = null;
       this.selectedStyle = null;
@@ -128,8 +134,44 @@ export default {
       this.maxPrice = 900;
       // Load default tops again
       this.$store.dispatch('getProductsTops');
+
     },
+
+    applyGender() {
+      if (this.selectedGender) {
+        this.$store.dispatch('getBottomsByType', this.selectedGender);
+      }
+
+    },
+
+    applyStyle() {
+      if (this.selectedStyle) {
+        this.$store.dispatch('getBottomsByStyle', this.selectedStyle);
+      }
+
+    },
+    
+    applyPrice() {
+      // keep sliders valid
+      if (this.minPrice >= this.maxPrice) {
+        this.minPrice = this.maxPrice - 5;
+      }
+      this.$store.dispatch('getBottomsByPrice', { min: this.minPrice, max: this.maxPrice });
+
+    },
+
+    resetFilters() {
+      this.selectedGender = null;
+      this.selectedStyle = null;
+      this.minPrice = 100;
+      this.maxPrice = 900;
+      // Load default tops again
+      this.$store.dispatch('getProductsBottoms');
+
+    },
+
   },
+
 };
 </script>
 
@@ -160,32 +202,49 @@ export default {
 }
 
 .filterBar h3 {
-    width: 100px
+  width: 100px
 }
 
 .filter-btn-container {
-    display: none;
-    padding: 0.5rem;
-    background: #f8f8f8;
-    text-align: center;
+  padding: 0.5rem;
+  background: #f8f8f8;
+  text-align: center;
+  display: none;
 }
 
 .filter-toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    /* background: linear-gradient(to right, #3315dec4, rgb(54, 142, 237)); */
-      background: linear-gradient(100deg, #000000, #3b3b3c, #f9750f);
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    cursor: pointer;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(to right, #3315dec4, rgb(54, 142, 237)); 
+  /*   background: linear-gradient(100deg, #000000, #3b3b3c, #f9750f);*/
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100px;
+  display: inline-flex;
+  box-shadow:
+        /* right shadow */
+        6px 0px 10px -1px rgba(25, 96, 250, 0.414),
+        /* left shadow*/ 
+        -4px 0px 3.5px -2px rgba(152, 30, 246, 0.414),
+        /* top shadow */
+        0px -4px 3.5px -2px rgba(152, 30, 246, 0.414),
+        /* bottom shadow */
+        0px 6px 8px -1px rgba(25, 96, 250, 0.414);
+        transition: transform 0.3s ease;
+        
+  
+}
+
+.filter-toggle:hover{
+  transform: translateY(-5px); 
 }
 
 .filter-toggle img {
-    width: 20px;
-    height: 20px;
+  width: 20px;
+  height: 20px;
 }
 
 
