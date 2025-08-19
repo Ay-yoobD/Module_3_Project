@@ -1,25 +1,22 @@
 <template>
-  <body>
-    <nav>
-      <ShopNavBar />
-    </nav>
+    <body>
+        <nav>
+            <ShopNavBar />
+        </nav>
+        <aside id="filterside" :class="{ show: isFilterOpen }" class="PageTargetter">
+            <ShopFilterBar />
+        </aside>
 
-    <div class="filter-btn-container" style="top:60px">
-      <button class="filter-toggle" @click="toggleSide">
-        <img src="../assets/filter.png" alt="filterbtn" />
-      </button>
-    </div>
+        <main>
+            <div class="ProductCardView">
+                <ShopProdCard v-for="prod in products" :key="prod.id" :product="prod" />
 
-    <aside id="filterside" :class="{ show: isFilterOpen }" class="PageTargetter">
-      <ShopFilterBar />
-    </aside>
+            </div>
 
-    <main>
-      <div class="ProductCardView">
-        <ShopProdCard v-for="prod in products" :key="prod.id" :product="prod" />
-      </div>
-    </main>
-  </body>
+        </main>
+
+    </body>
+
 </template>
 
 <script>
@@ -28,34 +25,41 @@ import ShopFilterBar from "../components/ShopFilterBar.vue";
 import ShopProdCard from "@/components/ShopProdCard.vue";
 
 export default {
-  components: { ShopNavBar, ShopFilterBar, ShopProdCard },
+    components: {
+        ShopNavBar,
+        ShopFilterBar,
+        ShopProdCard
 
-  data() {
-    return {
-      isFilterOpen: false,
-    };
-  },
-
-  computed: {
-    products() {
-      return this.$store.state.products; // reactive source of truth
     },
-  },
+    data() {
+        return {
+            isFilterOpen: false,
+            products: [] 
 
-  methods: {
-    toggleSide() {
-      this.isFilterOpen = !this.isFilterOpen;
+        };
+
     },
-  },
+    methods: {
+        toggleSide() {
+            this.isFilterOpen = !this.isFilterOpen;
+        },
 
-  created() {
-    // initial load for Tops
-    this.$store.dispatch("getProductsBottoms");
-  },
+        async loadProducts() {
+            await this.$store.dispatch("getProductsSneakers");
+            this.products = this.$store.state.products; 
+            
+        }
+
+    },
+
+    mounted() {
+        this.loadProducts();
+
+    }
+
 };
+
 </script>
-
-
 
 <style scoped>
 /* -----------------------------------------Grid CSS-------------------------------------------- */
@@ -128,7 +132,9 @@ main {
     grid-area: main;
     padding: 15px;
 
-    .ProductCardView {
+}
+
+.ProductCardView {
 
     display: flex;
     justify-content: center;
@@ -136,10 +142,8 @@ main {
     gap: 40px;
     flex-wrap: wrap;
 
-    }
+
 }
-
-
 
 /* --------------------------------------------------------------------------------------------- */
 </style>

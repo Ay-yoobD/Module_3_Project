@@ -1,8 +1,6 @@
 import { createStore } from 'vuex';
 import axios from 'axios';
 
-const API = 'http://localhost:3000';
-
 const store = createStore({
   state: {
     user: null,
@@ -24,7 +22,9 @@ const store = createStore({
      setProducts(state, products) {
       state.products = products;
     },
-
+    setFilters(state, filters) {
+      state.filters = { ...state.filters, ...filters };
+    },
 
   },
 
@@ -114,52 +114,27 @@ const store = createStore({
 
     },
 
-     // ----------- BASE LOADERS -----------
-    async getProductsTops({ commit }) {
-      const { data } = await axios.get(`${API}/products/load/tops`);
-      commit('setProducts', data.prods);
-    },
-    async getProductsBottoms({ commit }) {
-      const { data } = await axios.get(`${API}/products/load/bottoms`);
-      commit('setProducts', data.prods);
-    },
-    async getProductsSneakers({ commit }) {
-      const { data } = await axios.get(`${API}/products/load/sneakers`);
-      commit('setProducts', data.prods);
-    },
-    async getProductsAccessories({ commit }) {
-      const { data } = await axios.get(`${API}/products/load/accessories`);
-      commit('setProducts', data.prods);
-    },
-    async getProductsFeatured({ commit }) {
-      const { data } = await axios.get(`${API}/products/load/featured`);
-      commit('setProducts', data.prods);
-    },
-
-    // ----------- SERVER-SIDE FILTERS (TOPS) -----------
-    async getTopsByType({ commit }, type) {
-      const { data } = await axios.get(`${API}/products/load/tops/type/${type}`);
-      commit('setProducts', data.prods);
-    },
-    async getTopsByStyle({ commit }, style) {
-      const { data } = await axios.get(`${API}/products/load/tops/style/${style}`);
-      commit('setProducts', data.prods);
-    },
-    async getTopsByPrice({ commit }, { min, max }) {
-      const params = new URLSearchParams();
-      if (min != null) params.set('min', min);
-      if (max != null) params.set('max', max);
-      const { data } = await axios.get(`${API}/products/load/tops/price?${params.toString()}`);
-      commit('setProducts', data.prods);
-    },
-
   },
 
   getters: {
     isLoggedIn: state => !!state.user,
+
+     filteredProducts(state) {
+      return state.products.filter((p) => {
+        let matches = true;
+
+        if (state.filters.category) {
+          matches = matches && p.category === state.filters.category;
+        }
+        if (state.filters.maxPrice) {
+          matches = matches && p.price <= state.filters.maxPrice;
+        }
+
+        return matches;
+      });
+    },
   },
   
-}
-);
+});
 
 export default store;

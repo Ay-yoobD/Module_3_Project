@@ -1,31 +1,25 @@
 <template>
+  <body>
+    <nav>
+      <ShopNavBar />
+    </nav>
 
-    <body>
+    <div class="filter-btn-container" style="top:60px">
+      <button class="filter-toggle" @click="toggleSide">
+        <img src="../assets/filter.png" alt="filterbtn" />
+      </button>
+    </div>
 
+    <aside id="filterside" :class="{ show: isFilterOpen }" class="PageTargetter">
+      <ShopFilterBar />
+    </aside>
 
-        <nav>
-            <ShopNavBar />
-        </nav>
-
-        <div class="filter-btn-container" style="top:60px">
-            <button class="filter-toggle" @click="toggleSide">
-                <img src="../assets/filter.png" alt="filterbtn">
-            </button>
-        </div>
-        <aside id="filterside" :class="{ show: isFilterOpen }" class="PageTargetter">
-            <ShopFilterBar />
-        </aside>
-
-        <main>
-            <div class="ProductCardView">
-                <ShopProdCard v-for="prod in products" :key="prod.id" :product="prod" />
-
-            </div>
-
-        </main>
-
-    </body>
-
+    <main>
+      <div class="ProductCardView">
+        <ShopProdCard v-for="prod in products" :key="prod.id" :product="prod" />
+      </div>
+    </main>
+  </body>
 </template>
 
 <script>
@@ -34,41 +28,34 @@ import ShopFilterBar from "../components/ShopFilterBar.vue";
 import ShopProdCard from "@/components/ShopProdCard.vue";
 
 export default {
-    components: {
-        ShopNavBar,
-        ShopFilterBar,
-        ShopProdCard
+  components: { ShopNavBar, ShopFilterBar, ShopProdCard },
 
+  data() {
+    return {
+      isFilterOpen: false,
+    };
+  },
+
+  computed: {
+    products() {
+      return this.$store.state.products; // reactive source of truth
     },
-    data() {
-        return {
-            isFilterOpen: false,
-            products: [] 
+  },
 
-        };
-
+  methods: {
+    toggleSide() {
+      this.isFilterOpen = !this.isFilterOpen;
     },
-    methods: {
-        toggleSide() {
-            this.isFilterOpen = !this.isFilterOpen;
-        },
+  },
 
-        async loadProducts() {
-            await this.$store.dispatch("getProductsAccessories");
-            this.products = this.$store.state.products; 
-            
-        }
-
-    },
-
-    mounted() {
-        this.loadProducts();
-
-    }
-
+  created() {
+    // initial load for Tops
+    this.$store.dispatch("getProductsAccessories");
+  },
 };
-
 </script>
+
+
 
 <style scoped>
 /* -----------------------------------------Grid CSS-------------------------------------------- */

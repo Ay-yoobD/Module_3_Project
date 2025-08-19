@@ -1,8 +1,6 @@
 import { createStore } from 'vuex';
 import axios from 'axios';
 
-const API = 'http://localhost:3000';
-
 const store = createStore({
   state: {
     user: null,
@@ -17,6 +15,7 @@ const store = createStore({
     setUser(state, payload) {
       state.user = payload;
     },
+
     setProds(state, payload) {
       state.products = payload
     },
@@ -25,6 +24,9 @@ const store = createStore({
       state.products = products;
     },
 
+    setFilters(state, filters) {
+      state.filters = { ...state.filters, ...filters };
+    },
 
   },
 
@@ -42,9 +44,9 @@ const store = createStore({
     async getProductsTops({ commit }) {
       try {
         let data = await axios.get('http://localhost:3000/products/load/tops')
-        console.log(data.data.prods)
+        console.log(data.prods)
 
-        commit('setProds', data.data.prods)
+        commit('setProds', data.prods)
 
       } catch (error) {
         console.error('Failed to fetch products:', error)
@@ -114,52 +116,47 @@ const store = createStore({
 
     },
 
-     // ----------- BASE LOADERS -----------
-    async getProductsTops({ commit }) {
-      const { data } = await axios.get(`${API}/products/load/tops`);
-      commit('setProducts', data.prods);
-    },
-    async getProductsBottoms({ commit }) {
-      const { data } = await axios.get(`${API}/products/load/bottoms`);
-      commit('setProducts', data.prods);
-    },
-    async getProductsSneakers({ commit }) {
-      const { data } = await axios.get(`${API}/products/load/sneakers`);
-      commit('setProducts', data.prods);
-    },
-    async getProductsAccessories({ commit }) {
-      const { data } = await axios.get(`${API}/products/load/accessories`);
-      commit('setProducts', data.prods);
-    },
-    async getProductsFeatured({ commit }) {
-      const { data } = await axios.get(`${API}/products/load/featured`);
-      commit('setProducts', data.prods);
-    },
-
-    // ----------- SERVER-SIDE FILTERS (TOPS) -----------
-    async getTopsByType({ commit }, type) {
-      const { data } = await axios.get(`${API}/products/load/tops/type/${type}`);
-      commit('setProducts', data.prods);
-    },
-    async getTopsByStyle({ commit }, style) {
-      const { data } = await axios.get(`${API}/products/load/tops/style/${style}`);
-      commit('setProducts', data.prods);
-    },
-    async getTopsByPrice({ commit }, { min, max }) {
-      const params = new URLSearchParams();
-      if (min != null) params.set('min', min);
-      if (max != null) params.set('max', max);
-      const { data } = await axios.get(`${API}/products/load/tops/price?${params.toString()}`);
-      commit('setProducts', data.prods);
+    async getProducts({ commit }) {
+      try {
+        const { data } = await axios.get("http://localhost:3000/products");
+        commit("setProducts", data);
+      } catch (err) {
+        console.error("Error loading products:", err);
+      }
     },
 
   },
 
   getters: {
     isLoggedIn: state => !!state.user,
+
+filteredProducts(state) {
+    if (!state.products) return [];
+
+    return state.products.filter((p) => {
+      let matches = true;
+
+      if (state.filters.type) {
+        matches = matches && p.type === state.filters.type;
+      }
+      if (state.filters.style) {
+        matches = matches && p.style === state.filters.style;
+      }
+      if (state.filters.minPrice !== null) {
+        matches = matches && p.price >= state.filters.minPrice;
+      }
+      if (state.filters.maxPrice !== null) {
+        matches = matches && p.price <= state.filters.maxPrice;
+      }
+
+      return matches;
+      
+    });
+
+  },
+
   },
   
-}
-);
+});
 
 export default store;

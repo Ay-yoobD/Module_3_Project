@@ -30,6 +30,10 @@ ALTER TABLE `fashion_store`.`products`
 ADD COLUMN `gender` VARCHAR(6) NULL AFTER `created_at`,
 ADD COLUMN `style` VARCHAR(50) NULL AFTER `gender`;
 
+ALTER TABLE `fashion_store`.`products` 
+CHANGE COLUMN `gender` `type` VARCHAR(6) NULL DEFAULT NULL ;
+
+
 
 -- products table (5 per category)
 

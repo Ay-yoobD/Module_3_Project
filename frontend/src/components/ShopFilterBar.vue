@@ -1,134 +1,138 @@
 <template>
+  <aside id="filterside" :class="{ show: isFilterOpen }" class="PageTargetter">
+    <div class="ShopContainer">
+      <div class="filterBar">
+        <div class="filterHead">
+          <h3 class="display-5">Filters:</h3>
+        </div>
+        <hr style="width: 200px; margin-left: 15px;" class="my-2" />
 
-    <body>
-
-        <aside id="filterside" :class="{ show: isFilterOpen }" class="PageTargetter">
-            <div class="ShopContainer">
-                <div class="filterBar">
-                    <div class="filterHead">
-                        <h3 class="display-5">Filters:</h3>
-
-                    </div>
-                        <hr style="width: 200px; margin-left: 15px;" class="my-2">
-                        
-                    <ul>
-                        <li>
-                            <h4>
-                                Type:
-
-                            </h4>
-                            
-                            <div class="TypeFilter">
-                                <ul>
-                                    <li><input type="radio" name="type" value="Men"> Men</li>
-                                    <li><input type="radio" name="type" value="Women"> Women</li>
-                                    <li><input type="radio" name="type" value="Youth"> Youth</li>
-
-                                </ul>
-
-                            </div>
-
-                        </li>
-                        <br>
-                        <li>
-                            <h4>
-                                Style:
-
-                            </h4>
-
-                            <div class="StyleFilter">
-                                <ul>
-                                    <li><input type="radio" name="style" value="Casual"> Casual</li>
-                                    <li> <input type="radio" name="style" value="SmartCasual"> Smart Casual</li>
-                                    <li><input type="radio" name="style" value="Formal"> Formal</li>
-                                    <li><input type="radio" name="style" value="Sport"> Sporty</li>
-
-                                </ul>
-
-                            </div>
-                        </li>
-                        <br>
-                        <li>
-                            <h4>
-                                Price:
-
-                            </h4>
-                            
-                            <div class="PriceRangeFilter">
-                                <ul>
-                                    <li>
-                                        <label for="minPrice">Minimum Price:</label>
-                                        R<span id="minVal">{{ minPrice }}</span>
-                                        <br>
-                                        <input type="range" id="minPrice" min="0" max="1500" step="5"
-                                            v-model="minPrice">
-
-                                    </li>
-
-                                    <li>
-                                        <label for="maxPrice">Maximum Price:</label>
-                                        R<span id="maxVal">{{ maxPrice }}</span>
-                                        <br>
-                                        <input type="range" id="maxPrice" min="0" max="1500" step="5"
-                                            v-model="maxPrice">
-
-                                    </li>
-
-                                </ul>
-
-                            </div>
-
-                        </li>
-
-                    </ul>
-
-                </div>
-
+        <ul>
+          <!-- TYPE / GENDER -->
+          <li>
+            <h4>Type:</h4>
+            <div class="TypeFilter">
+              <ul>
+                <li>
+                  <input type="radio" name="type" value="Male" v-model="selectedGender" @change="applyGender" />
+                  Male
+                </li>
+                <li>
+                  <input type="radio" name="type" value="Female" v-model="selectedGender" @change="applyGender" />
+                  Female
+                </li>
+                <li>
+                  <input type="radio" name="type" value="Youth" v-model="selectedGender" @change="applyGender" />
+                  Youth
+                </li>
+              </ul>
             </div>
+          </li>
 
-        </aside>
+          <br />
 
-    </body>
+          <!-- STYLE -->
+          <li>
+            <h4>Style:</h4>
+            <div class="StyleFilter">
+              <ul>
+                <li>
+                  <input type="radio" name="style" value="Casual" v-model="selectedStyle" @change="applyStyle" />
+                  Casual
+                </li>
+                <li>
+                  <input type="radio" name="style" value="SmartCasual" v-model="selectedStyle" @change="applyStyle" />
+                  Smart Casual
+                </li>
+                <li>
+                  <input type="radio" name="style" value="Formal" v-model="selectedStyle" @change="applyStyle" />
+                  Formal
+                </li>
+                <li>
+                  <input type="radio" name="style" value="Sport" v-model="selectedStyle" @change="applyStyle" />
+                  Sporty
+                </li>
+              </ul>
+            </div>
+          </li>
 
+          <br />
+
+          <!-- PRICE (optional server filter for tops) -->
+          <li>
+            <h4>Price:</h4>
+            <div class="PriceRangeFilter">
+              <ul>
+                <li>
+                  <label for="minPrice">Minimum Price:</label>
+                  R<span id="minVal">{{ minPrice }}</span>
+                  <br />
+                  <input id="minPrice" type="range" min="0" max="1500" step="5" v-model.number="minPrice" @change="applyPrice" />
+                </li>
+
+                <li>
+                  <label for="maxPrice">Maximum Price:</label>
+                  R<span id="maxVal">{{ maxPrice }}</span>
+                  <br />
+                  <input id="maxPrice" type="range" min="0" max="1500" step="5" v-model.number="maxPrice" @change="applyPrice" />
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <br />
+
+          <!-- RESET -->
+          <li>
+            <button @click="resetFilters" class="filter-toggle">Clear Filters</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
 </template>
 
 <script>
-import ShopNavBar from "../components/ShopNavBar.vue";
-
 export default {
-    data() {
-        return {
-            minPrice: 100,
-            maxPrice: 900,
+  data() {
+    return {
+      selectedGender: null,
+      selectedStyle: null,
+      minPrice: 100,
+      maxPrice: 900,
+    };
+  },
 
-
-        };
-
+  methods: {
+    applyGender() {
+      if (this.selectedGender) {
+        this.$store.dispatch('getTopsByType', this.selectedGender);
+      }
     },
-
-    components: {
-        ShopNavBar
+    applyStyle() {
+      if (this.selectedStyle) {
+        this.$store.dispatch('getTopsByStyle', this.selectedStyle);
+      }
     },
-
-
-
-    watch: {
-        minPrice(Num) {
-            if (Num >= +this.maxPrice) {
-                this.minPrice = +this.maxPrice - 5;
-            }
-        },
-        maxPrice(Num) {
-            if (Num <= +this.minPrice) {
-                this.maxPrice = +this.minPrice + 5;
-            }
-        },
+    applyPrice() {
+      // keep sliders valid
+      if (this.minPrice >= this.maxPrice) {
+        this.minPrice = this.maxPrice - 5;
+      }
+      this.$store.dispatch('getTopsByPrice', { min: this.minPrice, max: this.maxPrice });
     },
-
-}
-
-
+    resetFilters() {
+      this.selectedGender = null;
+      this.selectedStyle = null;
+      this.minPrice = 100;
+      this.maxPrice = 900;
+      // Load default tops again
+      this.$store.dispatch('getProductsTops');
+    },
+  },
+};
 </script>
+
 
 <style scoped>
 * {

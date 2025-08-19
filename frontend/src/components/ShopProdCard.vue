@@ -48,8 +48,11 @@ export default {
         product: {
             type: Object,
             required: true
+            
         }
+
     }
+
 };
 </script>
 
