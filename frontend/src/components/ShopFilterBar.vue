@@ -14,18 +14,15 @@
             <div class="TypeFilter">
               <ul>
                 <li>
-                  <input type="radio" name="type" value="Male" v-model="selectedGender" @change="applyGender" />
-                  Male
+                  <input type="radio" name="type" value="Male" v-model="selectedGender" @change="applyGender" /> Male
+                </li>
+                
+                <li>
+                  <input type="radio" name="type" value="Female" v-model="selectedGender" @change="applyGender" /> Female
                 </li>
 
                 <li>
-                  <input type="radio" name="type" value="Female" v-model="selectedGender" @change="applyGender" />
-                  Female
-                </li>
-
-                <li>
-                  <input type="radio" name="type" value="Youth" v-model="selectedGender" @change="applyGender" />
-                  Youth
+                  <input type="radio" name="type" value="Youth" v-model="selectedGender" @change="applyGender" /> Youth
                 </li>
 
               </ul>
@@ -41,23 +38,19 @@
             <div class="StyleFilter">
               <ul>
                 <li>
-                  <input type="radio" name="style" value="Casual" v-model="selectedStyle" @change="applyStyle" />
-                  Casual
+                  <input type="radio" name="style" value="Casual" v-model="selectedStyle" @change="applyStyle" /> Casual
                 </li>
 
                 <li>
-                  <input type="radio" name="style" value="SmartCasual" v-model="selectedStyle" @change="applyStyle" />
-                  Smart Casual
+                  <input type="radio" name="style" value="SmartCasual" v-model="selectedStyle" @change="applyStyle" /> Smart Casual
                 </li>
 
                 <li>
-                  <input type="radio" name="style" value="Formal" v-model="selectedStyle" @change="applyStyle" />
-                  Formal
+                  <input type="radio" name="style" value="Formal" v-model="selectedStyle" @change="applyStyle" /> Formal
                 </li>
 
                 <li>
-                  <input type="radio" name="style" value="Sport" v-model="selectedStyle" @change="applyStyle" />
-                  Sporty
+                  <input type="radio" name="style" value="Sport" v-model="selectedStyle" @change="applyStyle" /> Sporty
                 </li>
 
               </ul>
@@ -84,7 +77,6 @@
                   R<span id="maxVal">{{ maxPrice }}</span>
                   <br />
                   <input id="maxPrice" type="range" min="0" max="15000" step="5" v-model.number="maxPrice" @change="applyPrice" />
-
                 </li>
 
               </ul>
@@ -97,7 +89,6 @@
 
           <li>
             <button @click="resetFilters" class="filter-toggle">Clear Filters</button>
-
           </li>
 
         </ul>
@@ -110,13 +101,10 @@
 
 </template>
 
-
-
 <script>
 export default {
   props: {
-    category: { type: String, required: true } 
-
+    category: { type: String, required: true }
   },
 
   data() {
@@ -125,38 +113,23 @@ export default {
       selectedStyle: null,
       minPrice: 100,
       maxPrice: 9000
-
     };
+  },
+
+  mounted() {
+    this.$store.dispatch('loadCategoryProducts', this.category.toLowerCase());
 
   },
 
   methods: {
     applyGender() {
-      if (!this.selectedGender) return;
-
-      const actionMap = {
-        Tops: 'getTopsByType',
-        Bottoms: 'getBottomsByType',
-        Sneakers: 'getSneakersByType',
-        Accessories: 'getAccessoriesByType'
-      };
-
-      this.$store.dispatch(actionMap[this.category], this.selectedGender);
+      this.$store.commit('setFilter', { key: 'type', value: this.selectedGender });
 
     },
 
     applyStyle() {
-      if (!this.selectedStyle) return;
+      this.$store.commit('setFilter', { key: 'style', value: this.selectedStyle });
 
-      const actionMap = {
-        Tops: 'getTopsByStyle',
-        Bottoms: 'getBottomsByStyle',
-        Sneakers: 'getSneakersByStyle',
-        Accessories: 'getAccessoriesByStyle'
-
-      };
-
-      this.$store.dispatch(actionMap[this.category], this.selectedStyle);
     },
 
     applyPrice() {
@@ -164,15 +137,9 @@ export default {
         this.minPrice = this.maxPrice - 5;
       }
 
-      const actionMap = {
-        Tops: 'getTopsByPrice',
-        Bottoms: 'getBottomsByPrice',
-        Sneakers: 'getSneakersByPrice',
-        Accessories: 'getAccessoriesByPrice'
+      this.$store.commit('setFilter', { key: 'minPrice', value: this.minPrice });
+      this.$store.commit('setFilter', { key: 'maxPrice', value: this.maxPrice });
 
-      };
-
-      this.$store.dispatch(actionMap[this.category], { min: this.minPrice, max: this.maxPrice });
     },
 
     resetFilters() {
@@ -180,21 +147,15 @@ export default {
       this.selectedStyle = null;
       this.minPrice = 100;
       this.maxPrice = 9000;
-      const actionMap = {
-        Tops: 'getProductsTops',
-        Bottoms: 'getProductsBottoms',
-        Sneakers: 'getProductsSneakers',
-        Accessories: 'getProductsAccessories'
-
-      };
-
-      this.$store.dispatch(actionMap[this.category]);
+      this.$store.commit('resetFilters');
+      this.$store.dispatch('loadCategoryProducts', this.category.toLowerCase());
 
     }
 
   }
 
 };
+
 </script>
 
 <style scoped>
