@@ -9,7 +9,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Routes
+//---------------------------------- Routes function importing: ------------------------------------------
 const {
   LoadProdsTopsCon,
   LoadProdsBottomsCon,
@@ -21,42 +21,55 @@ const {
   LoadProdsTopsByPriceCon,
   LoadProdsBottomsByTypeCon,
   LoadProdsBottomsByStyleCon,
-  LoadProdsBottomsByPriceCon
+  LoadProdsBottomsByPriceCon,
+  LoadProdsSneakersByTypeCon,
+  LoadProdsSneakersByStyleCon,
+  LoadProdsSneakersByPriceCon,
+  LoadProdsAccessoriesByTypeCon,
+  LoadProdsAccessoriesByStyleCon,
+  LoadProdsAccessoriesByPriceCon,
 
 } = require('./ShopFuncs/ShopFuncs.js');
 
 const authRoutes = require('./routes/auth');
 app.use('/api/auth', authRoutes);
 
-// const {  LoadProdsTopsCon  } = require('./ShopFuncs/ShopFuncs.js');
-app.get('/products/load/tops',  LoadProdsTopsCon );
+//---------------------------------- Base Loaders Routes: -----------------------------------------
 
-// const {  LoadProdsBottomsCon } = require('./ShopFuncs/ShopFuncs.js');
-app.get('/products/load/bottoms',  LoadProdsBottomsCon );
+app.get('/products/load/tops', LoadProdsTopsCon);
+app.get('/products/load/bottoms', LoadProdsBottomsCon);
+app.get('/products/load/sneakers', LoadProdsSneakersCon);
+app.get('/products/load/accessories', LoadProdsAccessoriesCon);
+app.get('/products/load/featured', LoadProdsFeaturedCon);
 
-// const {  LoadProdsSneakersCon } = require('./ShopFuncs/ShopFuncs.js');
-app.get('/products/load/sneakers',  LoadProdsSneakersCon );
+//---------------------------------- Tops Filter Routes: ------------------------------------------
 
-// const {  LoadProdsAccessoriesCon } = require('./ShopFuncs/ShopFuncs.js');
-app.get('/products/load/accessories',  LoadProdsAccessoriesCon );
-
-// const {  LoadProdsFeaturedCon } = require('./ShopFuncs/ShopFuncs.js');
-app.get('/products/load/featured',  LoadProdsFeaturedCon );
-
-// NEW filter endpoints for Tops:
 app.get('/products/load/tops/type/:type', LoadProdsTopsByTypeCon);
 app.get('/products/load/tops/style/:style', LoadProdsTopsByStyleCon);
-app.get('/products/load/tops/price', LoadProdsTopsByPriceCon); 
+app.get('/products/load/tops/price', LoadProdsTopsByPriceCon);
+
+//---------------------------------- Bottoms Filter Routes: ---------------------------------------
 
 app.get('/products/load/bottoms/type/:type', LoadProdsBottomsByTypeCon);
 app.get('/products/load/bottoms/style/:style', LoadProdsBottomsByStyleCon);
-app.get('/products/load/bottoms/price', LoadProdsBottomsByPriceCon); 
+app.get('/products/load/bottoms/price', LoadProdsBottomsByPriceCon);
 
-// Server start
+//---------------------------------- Sneakers Filter Routes: --------------------------------------
+
+app.get('/products/load/sneakers/type/:type', LoadProdsSneakersByTypeCon);
+app.get('/products/load/sneakers/style/:style', LoadProdsSneakersByStyleCon);
+app.get('/products/load/sneakers/price', LoadProdsSneakersByPriceCon);
+
+//------------------------------- Accessories Filter Routes: --------------------------------------
+
+app.get('/products/load/accessories/type/:type', LoadProdsAccessoriesByTypeCon);
+app.get('/products/load/accessories/style/:style', LoadProdsAccessoriesByStyleCon);
+app.get('/products/load/accessories/price', LoadProdsAccessoriesByPriceCon);
+
 app.use((req, res) => {
   console.log("Unmatched route:", req.method, req.url);
   res.status(404).json({ error: "Route not found" });
-}); 
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

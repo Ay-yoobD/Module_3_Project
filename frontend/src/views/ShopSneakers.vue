@@ -2,24 +2,32 @@
   <body>
     <nav>
       <ShopNavBar />
+      
     </nav>
 
     <div class="filter-btn-container" style="top:60px">
       <button class="filter-toggle" @click="toggleSide">
         <img src="../assets/filter.png" alt="filterbtn" />
+
       </button>
+
     </div>
 
     <aside id="filterside" :class="{ show: isFilterOpen }" class="PageTargetter">
-      <ShopFilterBar />
+      <ShopFilterBar category="Sneakers" />
+
     </aside>
 
     <main>
       <div class="ProductCardView">
         <ShopProdCard v-for="prod in products" :key="prod.id" :product="prod" />
+
       </div>
+
     </main>
+
   </body>
+
 </template>
 
 <script>
@@ -33,25 +41,32 @@ export default {
   data() {
     return {
       isFilterOpen: false,
+
     };
+
   },
 
   computed: {
     products() {
-      return this.$store.state.products; // reactive source of truth
+      return this.$store.state.products; 
+
     },
+
   },
 
   methods: {
     toggleSide() {
       this.isFilterOpen = !this.isFilterOpen;
+
     },
+
   },
 
   created() {
-    // initial load for Tops
     this.$store.dispatch("getProductsSneakers");
+
   },
+
 };
 </script>
 

@@ -9,7 +9,9 @@
             <p class="fw-light ProdText">R{{ product.price }}</p>
             <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#productModal">
                 View Product
+                
             </button>
+
         </div>
 
     </div>

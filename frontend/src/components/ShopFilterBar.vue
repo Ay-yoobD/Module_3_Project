@@ -5,10 +5,10 @@
         <div class="filterHead">
           <h3 class="display-5">Filters:</h3>
         </div>
+
         <hr style="width: 200px; margin-left: 15px;" class="my-2" />
 
         <ul>
-          <!-- TYPE / GENDER -->
           <li>
             <h4>Type:</h4>
             <div class="TypeFilter">
@@ -17,21 +17,25 @@
                   <input type="radio" name="type" value="Male" v-model="selectedGender" @change="applyGender" />
                   Male
                 </li>
+
                 <li>
                   <input type="radio" name="type" value="Female" v-model="selectedGender" @change="applyGender" />
                   Female
                 </li>
+
                 <li>
                   <input type="radio" name="type" value="Youth" v-model="selectedGender" @change="applyGender" />
                   Youth
                 </li>
+
               </ul>
+
             </div>
+
           </li>
 
-          <br />
+          <br/>
 
-          <!-- STYLE -->
           <li>
             <h4>Style:</h4>
             <div class="StyleFilter">
@@ -40,25 +44,30 @@
                   <input type="radio" name="style" value="Casual" v-model="selectedStyle" @change="applyStyle" />
                   Casual
                 </li>
+
                 <li>
                   <input type="radio" name="style" value="SmartCasual" v-model="selectedStyle" @change="applyStyle" />
                   Smart Casual
                 </li>
+
                 <li>
                   <input type="radio" name="style" value="Formal" v-model="selectedStyle" @change="applyStyle" />
                   Formal
                 </li>
+
                 <li>
                   <input type="radio" name="style" value="Sport" v-model="selectedStyle" @change="applyStyle" />
                   Sporty
                 </li>
+
               </ul>
+
             </div>
+
           </li>
 
-          <br />
+          <br/>
 
-          <!-- PRICE (optional server filter for tops) -->
           <li>
             <h4>Price:</h4>
             <div class="PriceRangeFilter">
@@ -75,56 +84,95 @@
                   R<span id="maxVal">{{ maxPrice }}</span>
                   <br />
                   <input id="maxPrice" type="range" min="0" max="1500" step="5" v-model.number="maxPrice" @change="applyPrice" />
+
                 </li>
+
               </ul>
+
             </div>
+
           </li>
 
           <br />
 
-          <!-- RESET -->
           <li>
             <button @click="resetFilters" class="filter-toggle">Clear Filters</button>
+
           </li>
+
         </ul>
+
       </div>
+
     </div>
+
   </aside>
+
 </template>
+
+
 
 <script>
 export default {
+  props: {
+    category: { type: String, required: true } 
+
+  },
+
   data() {
     return {
       selectedGender: null,
       selectedStyle: null,
       minPrice: 100,
-      maxPrice: 900,
+      maxPrice: 900
+
     };
+
   },
 
   methods: {
     applyGender() {
-      if (this.selectedGender) {
-        this.$store.dispatch('getTopsByType', this.selectedGender);
-      }
+      if (!this.selectedGender) return;
+
+      const actionMap = {
+        Tops: 'getTopsByType',
+        Bottoms: 'getBottomsByType',
+        Sneakers: 'getSneakersByType',
+        Accessories: 'getAccessoriesByType'
+      };
+
+      this.$store.dispatch(actionMap[this.category], this.selectedGender);
 
     },
 
     applyStyle() {
-      if (this.selectedStyle) {
-        this.$store.dispatch('getTopsByStyle', this.selectedStyle);
-      }
+      if (!this.selectedStyle) return;
 
+      const actionMap = {
+        Tops: 'getTopsByStyle',
+        Bottoms: 'getBottomsByStyle',
+        Sneakers: 'getSneakersByStyle',
+        Accessories: 'getAccessoriesByStyle'
+
+      };
+
+      this.$store.dispatch(actionMap[this.category], this.selectedStyle);
     },
-    
+
     applyPrice() {
-      // keep sliders valid
       if (this.minPrice >= this.maxPrice) {
         this.minPrice = this.maxPrice - 5;
       }
-      this.$store.dispatch('getTopsByPrice', { min: this.minPrice, max: this.maxPrice });
 
+      const actionMap = {
+        Tops: 'getTopsByPrice',
+        Bottoms: 'getBottomsByPrice',
+        Sneakers: 'getSneakersByPrice',
+        Accessories: 'getAccessoriesByPrice'
+
+      };
+
+      this.$store.dispatch(actionMap[this.category], { min: this.minPrice, max: this.maxPrice });
     },
 
     resetFilters() {
@@ -132,49 +180,22 @@ export default {
       this.selectedStyle = null;
       this.minPrice = 100;
       this.maxPrice = 900;
-      // Load default tops again
-      this.$store.dispatch('getProductsTops');
+      const actionMap = {
+        Tops: 'getProductsTops',
+        Bottoms: 'getProductsBottoms',
+        Sneakers: 'getProductsSneakers',
+        Accessories: 'getProductsAccessories'
 
-    },
+      };
 
-    applyGender() {
-      if (this.selectedGender) {
-        this.$store.dispatch('getBottomsByType', this.selectedGender);
-      }
+      this.$store.dispatch(actionMap[this.category]);
 
-    },
+    }
 
-    applyStyle() {
-      if (this.selectedStyle) {
-        this.$store.dispatch('getBottomsByStyle', this.selectedStyle);
-      }
-
-    },
-    
-    applyPrice() {
-      // keep sliders valid
-      if (this.minPrice >= this.maxPrice) {
-        this.minPrice = this.maxPrice - 5;
-      }
-      this.$store.dispatch('getBottomsByPrice', { min: this.minPrice, max: this.maxPrice });
-
-    },
-
-    resetFilters() {
-      this.selectedGender = null;
-      this.selectedStyle = null;
-      this.minPrice = 100;
-      this.maxPrice = 900;
-      // Load default tops again
-      this.$store.dispatch('getProductsBottoms');
-
-    },
-
-  },
+  }
 
 };
 </script>
-
 
 <style scoped>
 * {
