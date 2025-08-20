@@ -83,7 +83,7 @@
                   <label for="maxPrice">Maximum Price:</label>
                   R<span id="maxVal">{{ maxPrice }}</span>
                   <br />
-                  <input id="maxPrice" type="range" min="0" max="1500" step="5" v-model.number="maxPrice" @change="applyPrice" />
+                  <input id="maxPrice" type="range" min="0" max="15000" step="5" v-model.number="maxPrice" @change="applyPrice" />
 
                 </li>
 
@@ -124,7 +124,7 @@ export default {
       selectedGender: null,
       selectedStyle: null,
       minPrice: 100,
-      maxPrice: 900
+      maxPrice: 9000
 
     };
 
@@ -179,7 +179,7 @@ export default {
       this.selectedGender = null;
       this.selectedStyle = null;
       this.minPrice = 100;
-      this.maxPrice = 900;
+      this.maxPrice = 9000;
       const actionMap = {
         Tops: 'getProductsTops',
         Bottoms: 'getProductsBottoms',
