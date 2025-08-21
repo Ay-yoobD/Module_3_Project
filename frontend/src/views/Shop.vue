@@ -1,21 +1,19 @@
 <template>
+  <body>
+    <nav>
+      <ShopNavBar />
+    </nav>
 
-    <body>
-
-
-        <nav>
-            <ShopNavBar />
-        </nav>
-        <main>
-            <div class="ProductCardView">
-                <ShopProdCard v-for="prod in products" :key="prod.id" :product="prod" />
-
-            </div>
-
-        </main>
-
-    </body>
-
+    <main>
+      <div class="ProductCardView">
+        <ShopProdCard 
+          v-for="prod in products" 
+          :key="prod.id" 
+          :product="prod" 
+        />
+      </div>
+    </main>
+  </body>
 </template>
 
 <script>
@@ -23,39 +21,23 @@ import ShopNavBar from "../components/ShopNavBar.vue";
 import ShopProdCard from "@/components/ShopProdCard.vue";
 
 export default {
-    components: {
-        ShopNavBar,
-        ShopProdCard
+  components: {
+    ShopNavBar,
+    ShopProdCard
+  },
 
-    },
-    data() {
-        return {
-            isFilterOpen: false,
-            products: [] 
-
-        };
-
-    },
-    methods: {
-        toggleSide() {
-            this.isFilterOpen = !this.isFilterOpen;
-        },
-
-        async loadProducts() {
-            await this.$store.dispatch("getProductsFeatured");
-            this.products = this.$store.state.products; 
-            
-        }
-
-    },
-
-    mounted() {
-        this.loadProducts();
-
+  computed: {
+    // Use the filtered getter even if no filters are applied
+    products() {
+      return this.$store.getters.filteredProducts;
     }
+  },
 
+  mounted() {
+    // Load featured products once
+    this.$store.dispatch("loadCategoryProducts", "Featured");
+  }
 };
-
 </script>
 
 
